@@ -10,12 +10,11 @@
 
 ## Overview
 
-LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing). This tool is ideal for researchers, developers, and enthusiasts who aim to assess the performance of LLMs quickly and efficiently.
+LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing). This tool is ideal for developers who aim to assess the performance of LLMs quickly and efficiently.
 
 ### Key Features
 
-* Automated setup and execution in a [Runpod](https://runpod.io?ref=9nvk2srl) instance.
-* Integration with [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) for comprehensive evaluation.
+* Automated setup and execution using [RunPod](https://runpod.io?ref=9nvk2srl).
 * Customizable evaluation parameters for tailored benchmarking.
 * Summary generation and upload to [GitHub Gist](https://gist.github.com/) for easy sharing and reference.
 
@@ -28,8 +27,8 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 ### Evaluation parameters
 
 * **Benchmark suite**: 
-    * `openllm`: List of tasks: "arc", "hellaswag", "truthfulqa", "winogrande", "gsm8k" (like the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)). It uses the [vllm](https://docs.vllm.ai/) implementation to enhance speed (note that the results will not be identical to those obtained without using vllm).
-    * `nous`: List of tasks: "agieval", "gpt4all", "truthfulqa", "bigbench" (popularized by [Teknium](https://github.com/teknium1) and [NousResearch](https://github.com/NousResearch)).
+    * `nous`: List of tasks: "agieval", "gpt4all", "truthfulqa", "bigbench" (popularized by [Teknium](https://github.com/teknium1) and [NousResearch](https://github.com/NousResearch)). This is recommended.
+    * `openllm`: List of tasks: "arc", "hellaswag", "truthfulqa", "winogrande", "gsm8k" (like the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)). It uses the [vllm](https://docs.vllm.ai/) implementation to enhance speed (note that the results will not be identical to those obtained without using vllm). "mmlu" is currently missing because of a problem with vllm.
 * **Model**: Enter the model id from Hugging Face.
 * **GPU**: Select the GPU you want for evaluation (see prices [here](https://www.runpod.io/console/gpu-cloud)). I recommend using beefy GPUs (RTX 3090 or higher), especially for the Open LLM benchmark suite.
 * **Number of GPUs**: Self-explanatory (not tested).

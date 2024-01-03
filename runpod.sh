@@ -61,21 +61,21 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     cd lm-evaluation-harness
     pip install -e ".[vllm]"
 
-    benchmark="arc"
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
-        --tasks arc_challenge \
-        --num_fewshot 25 \
-        --batch_size auto \
-        --output_path ./${benchmark}.json
+    # benchmark="arc"
+    # lm_eval --model vllm \
+    #     --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
+    #     --tasks arc_challenge \
+    #     --num_fewshot 25 \
+    #     --batch_size auto \
+    #     --output_path ./${benchmark}.json
 
-    benchmark="hellaswag"
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
-        --tasks hellaswag \
-        --num_fewshot 10 \
-        --batch_size auto \
-        --output_path ./${benchmark}.json
+    # benchmark="hellaswag"
+    # lm_eval --model vllm \
+    #     --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
+    #     --tasks hellaswag \
+    #     --num_fewshot 10 \
+    #     --batch_size auto \
+    #     --output_path ./${benchmark}.json
 
     benchmark="mmlu"
     lm_eval --model vllm \
@@ -86,29 +86,29 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --verbosity DEBUG \
         --output_path ./${benchmark}.json
     
-    benchmark="truthfulqa"
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
-        --tasks truthfulqa \
-        --num_fewshot 0 \
-        --batch_size auto \
-        --output_path ./${benchmark}.json
+    # benchmark="truthfulqa"
+    # lm_eval --model vllm \
+    #     --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
+    #     --tasks truthfulqa \
+    #     --num_fewshot 0 \
+    #     --batch_size auto \
+    #     --output_path ./${benchmark}.json
     
-    benchmark="winogrande"
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
-        --tasks winogrande \
-        --num_fewshot 5 \
-        --batch_size auto \
-        --output_path ./${benchmark}.json
+    # benchmark="winogrande"
+    # lm_eval --model vllm \
+    #     --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
+    #     --tasks winogrande \
+    #     --num_fewshot 5 \
+    #     --batch_size auto \
+    #     --output_path ./${benchmark}.json
     
-    benchmark="gsm8k"
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
-        --tasks gsm8k \
-        --num_fewshot 5 \
-        --batch_size auto \
-        --output_path ./${benchmark}.json
+    # benchmark="gsm8k"
+    # lm_eval --model vllm \
+    #     --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8 \
+    #     --tasks gsm8k \
+    #     --num_fewshot 5 \
+    #     --batch_size auto \
+    #     --output_path ./${benchmark}.json
 
     python ../llm-autoeval/main.py .
 else

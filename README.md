@@ -37,6 +37,8 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 
 ### Tokens
 
+Tokens use Colab's Secrets tab. Create two secrets called "runpod" and "github" and add the corresponding tokens you can find as follows:
+
 * **Runpod**: Please consider using my [referral link](https://runpod.io?ref=9nvk2srl) if you don't have an account yet. You can create your token [here](https://www.runpod.io/console/user/settings) under "API keys" (read & write permission). You'll also need to transfer some money there to start a pod.
 * **GitHub**: You can create your token [here](https://github.com/settings/tokens) (read & write, can be restricted to "gist" only).
 
@@ -55,7 +57,7 @@ You can compare your results with those listed on the [Open LLM Leaderboard](htt
 ## Troubleshooting
 
 * **"Error: File does not exist"**: This task didn't produce the JSON file that is parsed for the summary. Activate debug mode and rerun the evaluation to inspect the issue in the logs.
-* **"700 Killed" Error**: The hardware is not powerful enough for the evaluation. This happens when you try to run the Open LLM benchmark suite on a RTX 3070 for example.
+* **"700 Killed" Error**: The hardware is not powerful enough for the evaluation. This happens when you try to run the Open LLM benchmark suite on an RTX 3070 for example.
 * **Outdated CUDA Drivers**: That's unlucky. You'll need to start a new pod in this case.
 
 ## Acknowledgements

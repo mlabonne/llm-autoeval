@@ -6,7 +6,7 @@ apt install -y screen vim git-lfs
 screen
 
 # Install common libraries
-pip install -q requests accelerate sentencepiece pytablewriter
+pip install -q requests accelerate sentencepiece pytablewriter einops
 
 if [ "$DEBUG" == "True" ]; then
     echo "Launch LLM AutoEval in debug mode"

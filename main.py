@@ -84,4 +84,4 @@ if __name__ == "__main__":
         raise ValueError(f"The directory {args.directory} does not exist.")
 
     # Call the main function with the directory argument
-    main(args.directory)
+    main(args.directory, args.elapsed_time)

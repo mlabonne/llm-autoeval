@@ -1,5 +1,7 @@
 #!/bin/bash
 
+start=$(date +%s)
+
 # Install dependencies
 apt update
 apt install -y screen vim git-lfs
@@ -53,8 +55,11 @@ if [ "$BENCHMARK" == "nous" ]; then
         --device cuda:0 \
         --batch_size auto \
         --output_path ./${benchmark}.json
+
+    end=$(date +%s)
+    echo "Elapsed Time: $(($end-$start)) seconds"
     
-    python ../llm-autoeval/main.py .
+    python ../llm-autoeval/main.py . $(($end-$start))
 
 elif [ "$BENCHMARK" == "openllm" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
@@ -111,7 +116,10 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --batch_size auto \
         --output_path ./${benchmark}.json
 
-    python ../llm-autoeval/main.py .
+    end=$(date +%s)
+    echo "Elapsed Time: $(($end-$start)) seconds"
+    
+    python ../llm-autoeval/main.py . $(($end-$start))
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import argparse
+import time
 
 from llm_autoeval.table import make_table, make_final_table
 from llm_autoeval.upload import upload_to_github_gist
@@ -14,7 +15,7 @@ BENCHMARK = os.getenv("BENCHMARK")
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
 
 
-def main(directory: str) -> None:
+def main(directory: str, elapsed_time: float) -> None:
     # Variables
     tables = []
     averages = []
@@ -55,6 +56,10 @@ def main(directory: str) -> None:
     else:
         summary += "Average score: Not available due to errors"
 
+    # Add elapsed time
+    convert = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
+    summary += f"Elapsed time: {convert}"
+
     # Generate final table
     final_table = make_final_table(result_dict, MODEL)
     summary = final_table + "\n" + summary
@@ -69,6 +74,7 @@ if __name__ == "__main__":
     # Create the parser
     parser = argparse.ArgumentParser(description="Summarize results and upload them.")
     parser.add_argument("directory", type=str, help="The path to the directory with the JSON results")
+    parser.add_argument("elapsed_time", type=float, help="Elapsed time since the start of the evaluation")
 
     # Parse the arguments
     args = parser.parse_args()

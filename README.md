@@ -33,6 +33,8 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 * **GPU**: Select the GPU you want for evaluation (see prices [here](https://www.runpod.io/console/gpu-cloud)). I recommend using beefy GPUs (RTX 3090 or higher), especially for the Open LLM benchmark suite.
 * **Number of GPUs**: Self-explanatory (not tested).
 * **Container disk**: Size of the disk in GB.
+* **Cloud type**: RunPod offers a community cloud (cheaper) and a secure cloud.
+* **Trust remote code**: Models like Phi require this flag to run them.
 * **Debug**: The pod will not be destroyed at the end of the run (not recommended).
 
 ### Tokens

@@ -58,7 +58,7 @@ def main(directory: str, elapsed_time: float) -> None:
 
     # Add elapsed time
     convert = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
-    summary += f"\nElapsed time: {convert}"
+    summary += f"\n\nElapsed time: {convert}"
 
     # Generate final table
     final_table = make_final_table(result_dict, MODEL)

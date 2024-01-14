@@ -34,6 +34,7 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 * **Number of GPUs**: Self-explanatory (not tested).
 * **Container disk**: Size of the disk in GB.
 * **Cloud type**: RunPod offers a community cloud (cheaper) and a secure cloud.
+* **Repo**: If you made a fork of this repo, you can specify its URL here (the image only runs `runpod.sh`).
 * **Trust remote code**: Models like Phi require this flag to run them.
 * **Debug**: The pod will not be destroyed at the end of the run (not recommended).
 

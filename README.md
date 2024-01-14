@@ -1,16 +1,23 @@
-# 🧐 LLM AutoEval
-
-<p align="center">
-<a href="https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing"><img src="img/colab.svg" alt="Open In Colab"></a></center>
-</p>
+<div align="center">
+  <h1>🧐 LLM AutoEval</h1>
+  <p>
+    🐦 <a href="https://twitter.com/maximelabonne">Follow me on X</a> • 
+    🤗 <a href="https://huggingface.co/mlabonne">Hugging Face</a> • 
+    💻 <a href="https://mlabonne.github.io/blog">Blog</a> • 
+    📙 <a href="https://github.com/PacktPublishing/Hands-On-Graph-Neural-Networks-Using-Python">Hands-on GNN</a>
+  </p>
+   <p><em>Simplify LLM evaluation using a convenient Colab notebook.</em></p>
+   <a href="https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing"><img src="img/colab.svg" alt="Open In Colab"></a></center>
+</div>
+<br/>
 
 <p align="center">
 <img src='img/llmautoeval.png'>
 </p>
 
-## Overview
+## 🔍 Overview
 
-LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing). This tool is ideal for developers who aim to assess the performance of LLMs quickly and efficiently.
+LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing). You just need to specify the name of your model, a GPU, and press run!
 
 ### Key Features
 
@@ -22,7 +29,7 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 
 *Note: This project is in the early stages and primarily designed for personal use. Use it carefully and feel free to contribute.*
 
-## Quick Start
+## ⚡ Quick Start
 
 ### Evaluation parameters
 
@@ -45,11 +52,12 @@ Tokens use Colab's Secrets tab. Create two secrets called "runpod" and "github" 
 * **Runpod**: Please consider using my [referral link](https://runpod.io?ref=9nvk2srl) if you don't have an account yet. You can create your token [here](https://www.runpod.io/console/user/settings) under "API keys" (read & write permission). You'll also need to transfer some money there to start a pod.
 * **GitHub**: You can create your token [here](https://github.com/settings/tokens) (read & write, can be restricted to "gist" only).
 
-## Benchmark suites
+## 📊 Benchmark suites
 
 ### Nous
 
 You can compare your results with:
+* [YALL - Yet Another LLM Leaderboard](https://huggingface.co/spaces/mlabonne/Yet_Another_LLM_Leaderboard), my leaderboard made with the gists produced by LLM AutoEval.
 * Models like [OpenHermes-2.5-Mistral-7B](https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B#benchmark-results), [Nous-Hermes-2-SOLAR-10.7B](https://huggingface.co/NousResearch/Nous-Hermes-2-SOLAR-10.7B), or [Nous-Hermes-2-Yi-34B](https://huggingface.co/NousResearch/Nous-Hermes-2-Yi-34B). 
 * Teknium stores his evaluations in his [LLM-Benchmark-Logs](https://github.com/teknium1/LLM-Benchmark-Logs).
 
@@ -57,7 +65,7 @@ You can compare your results with:
 
 You can compare your results with those listed on the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard).
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 * **"Error: File does not exist"**: This task didn't produce the JSON file that is parsed for the summary. Activate debug mode and rerun the evaluation to inspect the issue in the logs.
 * **"700 Killed" Error**: The hardware is not powerful enough for the evaluation. This happens when you try to run the Open LLM benchmark suite on an RTX 3070 for example.

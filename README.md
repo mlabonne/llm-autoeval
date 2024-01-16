@@ -25,7 +25,7 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 * Customizable evaluation parameters for tailored benchmarking.
 * Summary generation and upload to [GitHub Gist](https://gist.github.com/) for easy sharing and reference.
 
-[View a sample summary here.](https://gist.github.com/mlabonne/88b21dd9698ffed75d6163ebdc2f6cc8)
+[View a sample summary here.](https://gist.github.com/mlabonne/ad0c665bbe581c8420136c3b52b3c15c)
 
 *Note: This project is in the early stages and primarily designed for personal use. Use it carefully and feel free to contribute.*
 
@@ -38,7 +38,7 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
     * `openllm`: List of tasks: ARC, HellaSwag, MMLU, Winogrande, GSM8K, and TruthfulQA (like the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)). It uses the [vllm](https://docs.vllm.ai/) implementation to enhance speed (note that the results will not be identical to those obtained without using vllm). "mmlu" is currently missing because of a problem with vllm.
 * **Model**: Enter the model id from Hugging Face.
 * **GPU**: Select the GPU you want for evaluation (see prices [here](https://www.runpod.io/console/gpu-cloud)). I recommend using beefy GPUs (RTX 3090 or higher), especially for the Open LLM benchmark suite.
-* **Number of GPUs**: Self-explanatory (not tested).
+* **Number of GPUs**: Self-explanatory (more cost-efficient than bigger GPUs if you need more VRAM).
 * **Container disk**: Size of the disk in GB.
 * **Cloud type**: RunPod offers a community cloud (cheaper) and a secure cloud.
 * **Repo**: If you made a fork of this repo, you can specify its URL here (the image only runs `runpod.sh`).
@@ -64,6 +64,14 @@ You can compare your results with:
 ### Open LLM
 
 You can compare your results with those listed on the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard).
+
+## 🏆 Leaderboard
+
+I use the summaries produced by LLM AutoEval to created [YALL - Yet Another LLM Leaderboard](https://huggingface.co/spaces/mlabonne/Yet_Another_LLM_Leaderboard) with plots as follows:
+
+![image](https://github.com/mlabonne/llm-autoeval/assets/81252890/a9a7e24a-ee29-4c8f-b587-4549d16bf142)
+
+Let me know if you're interested in creating your own leaderboard with your gists in one click. This can be easily converted into a small notebook to create this space.
 
 ## 🛠️ Troubleshooting
 

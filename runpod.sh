@@ -2,6 +2,21 @@
 
 start=$(date +%s)
 
+# Detect the number of NVIDIA GPUs and create a device string
+gpu_count=$(nvidia-smi -L | wc -l)
+if [ $gpu_count -eq 0 ]; then
+    echo "No NVIDIA GPUs detected. Exiting."
+    exit 1
+fi
+# Construct the CUDA device string
+cuda_devices=""
+for ((i=0; i<gpu_count; i++)); do
+    if [ $i -gt 0 ]; then
+        cuda_devices+=","
+    fi
+    cuda_devices+="$i"
+done
+
 # Install dependencies
 apt update
 apt install -y screen vim git-lfs
@@ -25,7 +40,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --model hf-causal \
         --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks agieval_aqua_rat,agieval_logiqa_en,agieval_lsat_ar,agieval_lsat_lr,agieval_lsat_rc,agieval_sat_en,agieval_sat_en_without_passage,agieval_sat_math \
-        --device cuda:0 \
+        --device cuda:$cuda_devices \
         --batch_size auto \
         --output_path ./${benchmark}.json
 
@@ -34,7 +49,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --model hf-causal \
         --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks hellaswag,openbookqa,winogrande,arc_easy,arc_challenge,boolq,piqa \
-        --device cuda:0 \
+        --device cuda:$cuda_devices \
         --batch_size auto \
         --output_path ./${benchmark}.json
 
@@ -43,7 +58,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --model hf-causal \
         --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks truthfulqa_mc \
-        --device cuda:0 \
+        --device cuda:$cuda_devices \
         --batch_size auto \
         --output_path ./${benchmark}.json
 
@@ -52,7 +67,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --model hf-causal \
         --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks bigbench_causal_judgement,bigbench_date_understanding,bigbench_disambiguation_qa,bigbench_geometric_shapes,bigbench_logical_deduction_five_objects,bigbench_logical_deduction_seven_objects,bigbench_logical_deduction_three_objects,bigbench_movie_recommendation,bigbench_navigate,bigbench_reasoning_about_colored_objects,bigbench_ruin_names,bigbench_salient_translation_error_detection,bigbench_snarks,bigbench_sports_understanding,bigbench_temporal_sequences,bigbench_tracking_shuffled_objects_five_objects,bigbench_tracking_shuffled_objects_seven_objects,bigbench_tracking_shuffled_objects_three_objects \
-        --device cuda:0 \
+        --device cuda:$cuda_devices \
         --batch_size auto \
         --output_path ./${benchmark}.json
 

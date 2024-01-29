@@ -45,7 +45,7 @@ if [ "$BENCHMARK" == "nous" ]; then
     cd lm-evaluation-harness
     pip install -e .
 
-    # Define function to run benchmark
+    # Define function to run benchmark for nous
     run_benchmark_nous() {
         benchmark=$1
         python main.py \
@@ -65,7 +65,11 @@ if [ "$BENCHMARK" == "nous" ]; then
 
     # Return to the initial directory and run the Python script to upload the results
     cd $initial_directory
-    python main.py . $(($end-$start))
+    if [ -f "main.py" ]; then
+        python main.py . $(($end-$start))
+    else
+        echo "Error: main.py not found in the expected directory."
+    fi
 
 elif [ "$BENCHMARK" == "openllm" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
@@ -73,7 +77,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     pip install -e ".[vllm,promptsource]"
     pip install langdetect immutabledict
 
-    # Define function to run benchmark
+    # Define function to run benchmark for openllm
     run_benchmark_openllm() {
         benchmark=$1
         lm_eval --model vllm \
@@ -93,7 +97,11 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 
     # Return to the initial directory and run the Python script to upload the results
     cd $initial_directory
-    python main.py . $(($end-$start))
+    if [ -f "main.py" ]; then
+        python main.py . $(($end-$start))
+    else
+        echo "Error: main.py not found in the expected directory."
+    fi
 
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."

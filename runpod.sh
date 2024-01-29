@@ -55,7 +55,7 @@ run_benchmark_nous() {
         --tasks $tasks \
         --device cuda:$cuda_devices \
         --batch_size auto \
-        --output_path ./${benchmark}.json
+        --output_path /results/${benchmark}.json
 }
 
 # Function definitions for openllm benchmark
@@ -68,7 +68,7 @@ run_benchmark_openllm() {
         --tasks $tasks \
         --num_fewshot $num_fewshot \
         --batch_size auto \
-        --output_path ./${benchmark}.json
+        --output_path /results/${benchmark}.json
 }
 
 # Run evaluation based on the BENCHMARK environment variable
@@ -101,7 +101,7 @@ echo "Elapsed Time: $(($end-$start)) seconds"
 cd /
 cd llm-autoeval
 if [ -f "main.py" ]; then
-    python main.py . $(($end-$start))
+    python main.py /results $(($end-$start))
 else
     echo "Error: main.py not found in the llm-autoeval directory."
 fi

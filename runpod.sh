@@ -97,6 +97,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 
     # Return to the initial directory and run the Python script to upload the results
     cd $initial_directory
+    cd /lm-evaluation-harness
     if [ -f "main.py" ]; then
         python main.py . $(($end-$start))
     else

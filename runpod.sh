@@ -101,9 +101,10 @@ echo "Elapsed Time: $(($end-$start)) seconds"
 cd /
 cd llm-autoeval
 if [ -f "main.py" ]; then
+    echo "sending Results to git"
     python main.py /results $(($end-$start))
 else
-    echo "Error: main.py not found in the llm-autoeval directory."
+    echo "Error: main.py not found."
 fi
 
 # If not in debug mode, remove the pod using the RUNPOD_POD_ID environment variable.

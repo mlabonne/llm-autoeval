@@ -39,7 +39,7 @@ def calculate_average(data, task):
                 data["results"]["gsm8k"]["exact_match,get-answer"] * 100
             )  # should be "acc" instead
 
-        elif BENCHMARK == "nous":
+    elif BENCHMARK == "nous":
         if task in ["agieval", "gpt4all"]:
             return get_acc_norm(data)
         elif task == "bigbench":

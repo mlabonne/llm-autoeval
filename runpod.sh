@@ -56,7 +56,7 @@ run_benchmark_nous() {
     benchmark=$1
     tasks=$2
     lm_eval --model hf \
-        --model_args parallelize=$parallelize,autogptq=$AUTOGPTQ,load_in_4bit=$LOAD_IN_4BIT,pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
+        --model_args parallelize=$parallelize,dtype=auto,load_in_4bit=$LOAD_IN_4BIT,pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks $tasks \
         --device cuda:$cuda_devices \
         --batch_size auto \

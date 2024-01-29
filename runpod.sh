@@ -36,7 +36,7 @@ pip install -q requests accelerate sentencepiece pytablewriter einops protobuf d
 # Clone and setup lm-evaluation-harness
 git clone https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-pip install -e .
+pip install -e ".[vllm,promptsource,]"
 
 # If in debug mode, print a message indicating that.
 if [ "$DEBUG" == "True" ]; then
@@ -75,13 +75,12 @@ run_benchmark_openllm() {
 case "$BENCHMARK" in
   "nous")
     # Run benchmarks for nous
-    #run_benchmark_nous "agieval" "agieval_aqua_rat,agieval_logiqa_en,agieval_lsat_ar,agieval_lsat_lr,agieval_lsat_rc,agieval_sat_en,agieval_sat_en_without_passage,agieval_sat_math"
-    #run_benchmark_nous "gpt4all" "hellaswag,openbookqa,winogrande,arc_easy,arc_challenge,boolq,piqa"
+    run_benchmark_nous "agieval" "agieval_aqua_rat,agieval_logiqa_en,agieval_lsat_ar,agieval_lsat_lr,agieval_lsat_rc,agieval_sat_en,agieval_sat_en_without_passage,agieval_sat_math"
+    run_benchmark_nous "gpt4all" "hellaswag,openbookqa,winogrande,arc_easy,arc_challenge,boolq,piqa"
     run_benchmark_nous "truthfulqa" "truthfulqa_mc"
-    #run_benchmark_nous "bigbench" "bigbench_causal_judgement,bigbench_date_understanding,bigbench_disambiguation_qa,bigbench_geometric_shapes,bigbench_logical_deduction_five_objects,bigbench_logical_deduction_seven_objects,bigbench_logical_deduction_three_objects,bigbench_movie_recommendation,bigbench_navigate,bigbench_reasoning_about_colored_objects,bigbench_ruin_names,bigbench_salient_translation_error_detection,bigbench_snarks,bigbench_sports_understanding,bigbench_temporal_sequences,bigbench_tracking_shuffled_objects_five_objects,bigbench_tracking_shuffled_objects_seven_objects,bigbench_tracking_shuffled_objects_three_objects"
+    run_benchmark_nous "bigbench" "bigbench_causal_judgement,bigbench_date_understanding,bigbench_disambiguation_qa,bigbench_geometric_shapes,bigbench_logical_deduction_five_objects,bigbench_logical_deduction_seven_objects,bigbench_logical_deduction_three_objects,bigbench_movie_recommendation,bigbench_navigate,bigbench_reasoning_about_colored_objects,bigbench_ruin_names,bigbench_salient_translation_error_detection,bigbench_snarks,bigbench_sports_understanding,bigbench_temporal_sequences,bigbench_tracking_shuffled_objects_five_objects,bigbench_tracking_shuffled_objects_seven_objects,bigbench_tracking_shuffled_objects_three_objects"
     ;;
   "openllm")
-    pip install ".[vllm,promptsource]"
     # Run benchmarks for openllm
     run_benchmark_openllm "arc" "arc_challenge" 25
     run_benchmark_openllm "hellaswag" "hellaswag" 10

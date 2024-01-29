@@ -31,7 +31,7 @@ apt install -y screen vim git-lfs
 screen
 
 # Install Python libraries: requests, accelerate, sentencepiece, pytablewriter, einops, protobuf, deepspeed
-pip install -q requests accelerate sentencepiece pytablewriter einops protobuf deepspeed
+pip install -q requests accelerate sentencepiece pytablewriter einops protobuf deepspeed gekko
 
 # Clone and setup lm-evaluation-harness
 git clone -b agieval https://github.com/EleutherAI/lm-evaluation-harness

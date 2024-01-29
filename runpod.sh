@@ -112,4 +112,5 @@ if [ "$DEBUG" == "False" ]; then
 fi
 
 # Prevent the script from exiting immediately.
+echo "Debug Enabled"
 sleep infinity

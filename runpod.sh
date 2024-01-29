@@ -36,7 +36,7 @@ pip install -q requests accelerate sentencepiece pytablewriter einops protobuf d
 # Clone and setup lm-evaluation-harness
 git clone -b agieval https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-pip install -e ".[vllm,promptsource]"
+pip install -e ".[vllm,promptsource,gptq]"
 
 # If in debug mode, print a message indicating that.
 if [ "$DEBUG" == "True" ]; then
@@ -46,12 +46,16 @@ fi
 # Store the initial directory to return later
 initial_directory=$(pwd)
 
+# Optional environment variables for model loading
+LOAD_IN_4BIT=${LOAD_IN_4BIT:-"false"}
+AUTOGPTQ=${AUTOGPTQ:-"false"}
+
 # Function definitions for nous benchmark
 run_benchmark_nous() {
     benchmark=$1
     tasks=$2
     lm_eval --model hf \
-        --model_args parallelize=$parallelize,pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
+        --model_args parallelize=$parallelize,autogptq=$AUTOGPTQ,load_in_4bit=$LOAD_IN_4BIT,pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks $tasks \
         --device cuda:$cuda_devices \
         --batch_size auto \
@@ -64,7 +68,7 @@ run_benchmark_openllm() {
     tasks=$2
     num_fewshot=$3
     lm_eval --model vllm \
-        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
+        --model_args pretrained=${MODEL},dtype=auto,gpu_memory_utilization=0.8,load_in_4bit=$LOAD_IN_4BIT,autogptq=$AUTOGPTQ,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks $tasks \
         --num_fewshot $num_fewshot \
         --batch_size auto \

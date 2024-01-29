@@ -1,33 +1,29 @@
 import os
 import math
-
 from pytablewriter import MarkdownTableWriter
-
 
 BENCHMARK = os.getenv("BENCHMARK")
 
 
 def get_acc_norm(data):
     accs = [
-        data["results"][k]["acc_norm"]
-        if "acc_norm" in data["results"][k]
-        else data["results"][k]["acc"]
+        float(data["results"][k][acc_key])  # Convert to float for safety
         for k in data["results"]
+        for acc_key in data["results"][k]
+        if acc_key.startswith("acc_norm,") or acc_key.startswith("acc,")
     ]
-    acc = sum(accs) / len(accs) * 100
-    return acc
+    return sum(accs) / len(accs) * 100 if accs else 0.0  # Add check to avoid division by zero
 
 
 def get_mcg(data):
     accs = [data["results"][k]["multiple_choice_grade"] for k in data["results"]]
-    acc = sum(accs) / len(accs) * 100
-    return acc
+    return sum(accs) / len(accs) * 100 if accs else 0.0
 
 
 def calculate_average(data, task):
     task = task.lower()
-    print(data)
-
+    print(data)  # Debugging print statement
+    
     if BENCHMARK == "openllm":
         if task == "arc":
             return data["results"]["arc_challenge"]["acc_norm,none"] * 100
@@ -43,10 +39,8 @@ def calculate_average(data, task):
                 data["results"]["gsm8k"]["exact_match,get-answer"] * 100
             )  # should be "acc" instead
 
-    elif BENCHMARK == "nous":
-        if task == "agieval":
-            return get_acc_norm(data)
-        elif task == "gpt4all":
+        elif BENCHMARK == "nous":
+        if task in ["agieval", "gpt4all"]:
             return get_acc_norm(data)
         elif task == "bigbench":
             return get_mcg(data)

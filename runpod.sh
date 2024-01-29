@@ -51,16 +51,20 @@ if [ "$BENCHMARK" == "nous" ]; then
     benchmark="agieval"
     python main.py \
         --model hf-causal \
+        # The model to test and the trust_remote_code variable (True or False)
         --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
-        --tasks agieval_aqua_rat,agieval_logiqa_en,agieval_lsat_ar,agieval_lsat_lr,agieval_lsat_rc,agieval_sat_en,agieval_sat_en_without_passage,agieval_sat_math \
-        --device cuda:$cuda_devices \
-        --batch_size auto \
+        # The tests to run
+        --tasks agieval_aqua_rat,agieval_logiqa_en,agieval_lsat_ar,agieval_lsat_lr,agieval_lsat_rc,agieval_sat_en,agieval_sat_en_without_passage,agieval_sat_math \ 
+        # The CUDA device string constructed earlier
+        --device cuda:$cuda_devices \ 
+        # The batch_size is set to auto
+        --batch_size auto \ 
         --output_path ./${benchmark}.json
-        
+
     benchmark="gpt4all"
     python main.py \
         --model hf-causal \
-        --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \
+        --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE \ 
         --tasks hellaswag,openbookqa,winogrande,arc_easy,arc_challenge,boolq,piqa \
         --device cuda:$cuda_devices \
         --batch_size auto \
@@ -83,7 +87,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --device cuda:$cuda_devices \
         --batch_size auto \
         --output_path ./${benchmark}.json
-        
+   
     # Record the end time and calculate the elapsed time.
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"

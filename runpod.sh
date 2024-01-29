@@ -34,7 +34,7 @@ screen
 pip install -q requests accelerate sentencepiece pytablewriter einops protobuf deepspeed
 
 # Clone and setup lm-evaluation-harness
-git clone https://github.com/EleutherAI/lm-evaluation-harness
+git clone -b agieval https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
 pip install -e ".[vllm,promptsource]"
 

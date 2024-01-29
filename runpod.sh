@@ -36,7 +36,7 @@ pip install -q requests accelerate sentencepiece pytablewriter einops protobuf d
 # Clone and setup lm-evaluation-harness
 git clone https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-pip install -e ".[vllm,promptsource,]"
+pip install -e ".[vllm,promptsource]"
 
 # If in debug mode, print a message indicating that.
 if [ "$DEBUG" == "True" ]; then
@@ -98,7 +98,7 @@ end=$(date +%s)
 echo "Elapsed Time: $(($end-$start)) seconds"
 
 # Return to the initial directory and run the Python script to upload the results
-cd $initial_directory
+cd /
 cd llm-autoeval
 if [ -f "main.py" ]; then
     python main.py . $(($end-$start))

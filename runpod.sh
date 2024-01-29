@@ -36,7 +36,7 @@ pip install -q requests accelerate sentencepiece pytablewriter einops protobuf d
 # Clone and setup lm-evaluation-harness
 git clone -b agieval https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-pip install -e ".[vllm,promptsource,gptq]"
+pip install -e ".[vllm,promptsource]"
 
 # If in debug mode, print a message indicating that.
 if [ "$DEBUG" == "True" ]; then
@@ -48,7 +48,7 @@ initial_directory=$(pwd)
 
 # Optional environment variables for model loading
 LOAD_IN_4BIT=${LOAD_IN_4BIT:-"false"}
-AUTOGPTQ=${AUTOGPTQ:-"false"}
+# AUTOGPTQ=${AUTOGPTQ:-"false"} #Optionl: as its more hassle than required
 
 # Function definitions for nous benchmark
 run_benchmark_nous() {

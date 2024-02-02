@@ -118,5 +118,5 @@ if [ "$DEBUG" == "False" ]; then
 fi
 
 # Prevent the script from exiting immediately.
-echo "Debug Enabled"
+echo "Debug Still Enabled!!! - Pod WILL NOT Shutdown Automatically!!!"
 sleep infinity

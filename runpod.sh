@@ -36,7 +36,7 @@ pip install -q requests accelerate sentencepiece pytablewriter einops protobuf d
 # Clone and setup lm-evaluation-harness
 git clone -b agieval https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-pip install -e ".[vllm,promptsource]"
+pip install -e ".[promptsource]"
 pip install auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu118/
 
 # If in debug mode, print a message indicating that.

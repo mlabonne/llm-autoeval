@@ -23,7 +23,7 @@ lm_eval --model hf \
     --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
     --device cuda:0 \
     --batch_size auto \
-    --limit 100 > result.log
+    --limit 100 | tee result.log
     #--output_path ./result
 
 end=$(date +%s)

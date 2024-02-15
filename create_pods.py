@@ -41,7 +41,7 @@ pod = runpod.create_pod(
         "GITHUB_API_TOKEN": GITHUB_API_TOKEN,
         "HF_TOKEN": HF_TOKEN,
     },
-    template_id='6p59tg6cln', #bash -c 'cd /workspace/; git clone https://github.com/chenhaodev/llm-autoeval; cd /workspace/llm-autoeval/; sh runpod.sh' #template_id="au6nz6emhk",
+    template_id='6p59tg6cln', #bash -c 'cd /workspace/; git clone https://github.com/chenhaodev/llm-autoeval; cd /workspace/llm-autoeval/; sh auto-eval.sh' #template_id="au6nz6emhk",
 )
 
 print("Pod started: https://www.runpod.io/console/pods")

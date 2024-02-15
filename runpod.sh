@@ -24,21 +24,18 @@ apt install -y screen vim git-lfs
 screen
 
 # Install common libraries
-pip install -q requests accelerate sentencepiece pytablewriter einops protobuf
+#pip install -q requests accelerate sentencepiece pytablewriter einops protobuf
 
 if [ "$DEBUG" == "True" ]; then
     echo "Launch LLM AutoEval in debug mode"
 fi
 
-# Run evaluation
-git clone https://github.com/chenhaodev/lm-evaluation-harness
-cd lm-evaluation-harness
-pip install -e .
-
-# Call example: lm_eval --model hf --model_args pretrained=/path-to-model,parallelize=True,load_in_4bit=True --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine --device cuda:0 --batch_size auto --limit 100
+# Run evaluation; e.g. apt-get update; apt-get install -y tmux vim git-lfs; tmux new -s ssh-download-llm; cd /workspace/; mkdir -p cache model; pip install huggingface_hub; huggingface-cli login --token xxx; huggingface-cli download --resume-download xxx/xxx --local-dir /workspace/model --local-dir-use-symlinks False --cache-dir /workspace/cache; lm_eval --model hf --model_args pretrained=/path-to-model,parallelize=True,load_in_4bit=True --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine --device cuda:0 --batch_size auto --limit 100
+cd /workspace/; mkdir -p cache model; git clone https://github.com/chenhaodev/lm-evaluation-harness; cd lm-evaluation-harness; pip install -e .;
+pip install huggingface_hub; huggingface-cli login --token $HF_TOKEN; huggingface-cli download --resume-download $MODEL --local-dir /workspace/model --local-dir-use-symlinks False --cache-dir /workspace/cache;
 
 lm_eval --model hf \
-    --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True \
+    --model_args pretrained=/workspace/model,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True \
     --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
     --device cuda:$cuda_devices \
     --batch_size auto \

@@ -8,14 +8,6 @@ if [ $gpu_count -eq 0 ]; then
     echo "No NVIDIA GPUs detected. Exiting."
     exit 1
 fi
-# Construct the CUDA device string
-cuda_devices=""
-for ((i=0; i<gpu_count; i++)); do
-    if [ $i -gt 0 ]; then
-        cuda_devices+=","
-    fi
-    cuda_devices+="$i"
-done
 
 # Install dependencies
 apt update
@@ -35,7 +27,7 @@ pip install huggingface_hub; huggingface-cli login --token $HF_TOKEN; huggingfac
 lm_eval --model hf \
     --model_args pretrained=/workspace/model,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True \
     --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
-    --device cuda:$cuda_devices \
+    --device cuda:0 \
     --batch_size auto \
     --limit 100 \
     --output_path ./result.log

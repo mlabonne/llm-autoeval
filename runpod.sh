@@ -29,13 +29,13 @@ lm_eval --model hf \
     --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
     --device cuda:0 \
     --batch_size auto \
-    --limit 100 \
-    --output_path ./result.log
+    --limit 100 > result.log
+    #--output_path ./result
 
 end=$(date +%s)
 echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
 
-cd /workspace/; python ../llm-autoeval/upload-result.py . $(($end-$start))
+cd /workspace/; python /workspace/llm-autoeval/upload-result.py . $(($end-$start))
 
 if [ "$DEBUG" == "False" ]; then
     runpodctl remove pod $RUNPOD_POD_ID

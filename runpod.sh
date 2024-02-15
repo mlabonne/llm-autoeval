@@ -35,7 +35,7 @@ lm_eval --model hf \
 end=$(date +%s)
 echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
 
-python ../llm-autoeval/upload-result.py . $(($end-$start))
+cd /workspace/; python ../llm-autoeval/upload-result.py . $(($end-$start))
 
 if [ "$DEBUG" == "False" ]; then
     runpodctl remove pod $RUNPOD_POD_ID

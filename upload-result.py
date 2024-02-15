@@ -15,7 +15,7 @@ BENCHMARK = os.getenv("BENCHMARK")
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
 
 def main(directory: str, elapsed_time: float) -> None:
-    file_path = f"{directory}/result.log"
+    file_path = "/workspace/model/result.log"
     summary = open(file_path, "r").read()
     upload_to_github_gist(
         summary, f"{MODEL.split('/')[-1]}-MedTasks.md", GITHUB_API_TOKEN

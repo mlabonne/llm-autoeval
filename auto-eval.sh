@@ -14,12 +14,6 @@ apt update
 apt install -y screen vim git-lfs
 screen
 
-# Install common libraries
-
-if [ "$DEBUG" == "True" ]; then
-    echo "Launch LLM AutoEval in debug mode"
-fi
-
 # Run evaluation
 cd /workspace/; mkdir -p cache model; git clone https://github.com/chenhaodev/lm-evaluation-harness; cd lm-evaluation-harness; pip install -e .;
 pip install huggingface_hub; huggingface-cli login --token $HF_TOKEN; huggingface-cli download --resume-download $MODEL --local-dir /workspace/model --local-dir-use-symlinks False --cache-dir /workspace/cache;
@@ -37,7 +31,8 @@ echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
 
 cd /workspace/; python /workspace/llm-autoeval/upload-result.py . $(($end-$start))
 
-if [ "$DEBUG" == "False" ]; then
-    runpodctl remove pod $RUNPOD_POD_ID
-fi
+#if [ "$DEBUG" == "False" ]; then
+#    runpodctl remove pod $RUNPOD_POD_ID
+#fi
+
 sleep infinity

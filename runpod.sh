@@ -1,4 +1,5 @@
 #!/bin/bash
+#main func start here
 
 start=$(date +%s)
 
@@ -30,8 +31,29 @@ if [ "$DEBUG" == "True" ]; then
 fi
 
 # Run evaluation
+git clone https://github.com/chenhaodev/lm-evaluation-harness
+cd lm-evaluation-harness
+pip install -e .
+
+# Call example: lm_eval --model hf --model_args pretrained=/path-to-model,parallelize=True,load_in_4bit=True --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine --device cuda:0 --batch_size auto --limit 100
+
+lm_eval --model hf \
+    --model_args pretrained=$MODEL,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True \
+    --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
+    --device cuda:$cuda_devices \
+    --batch_size auto \
+    --limit 100 \
+    --output_path ./result.log
+
+end=$(date +%s)
+echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
+
+python ../llm-autoeval/main.py . $(($end-$start))
+
+'''
+# Run evaluation
 if [ "$BENCHMARK" == "nous" ]; then
-    git clone -b add-agieval https://github.com/dmahan93/lm-evaluation-harness
+    git clone https://github.com/chenhaodev/lm-evaluation-harness
     cd lm-evaluation-harness
     pip install -e .
 
@@ -138,6 +160,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi
+'''
 
 if [ "$DEBUG" == "False" ]; then
     runpodctl remove pod $RUNPOD_POD_ID

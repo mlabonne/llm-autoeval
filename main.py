@@ -14,8 +14,14 @@ MODEL = os.getenv("MODEL")
 BENCHMARK = os.getenv("BENCHMARK")
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
 
-
 def main(directory: str, elapsed_time: float) -> None:
+    file_path = f"{directory}/result.log"
+    summary = open(file_path, "r").read()
+    upload_to_github_gist(
+        summary, f"{MODEL.split('/')[-1]}-MedTasks.md", GITHUB_API_TOKEN
+    )
+
+    '''
     # Variables
     tables = []
     averages = []
@@ -68,6 +74,7 @@ def main(directory: str, elapsed_time: float) -> None:
     upload_to_github_gist(
         summary, f"{MODEL.split('/')[-1]}-{BENCHMARK.capitalize()}.md", GITHUB_API_TOKEN
     )
+    '''
 
 
 if __name__ == "__main__":

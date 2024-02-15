@@ -45,7 +45,7 @@ lm_eval --model hf \
 end=$(date +%s)
 echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
 
-python ../llm-autoeval/main.py . $(($end-$start))
+python ../llm-autoeval/upload-result.py . $(($end-$start))
 
 '''
 # Run evaluation

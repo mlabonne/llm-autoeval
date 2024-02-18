@@ -8,7 +8,7 @@ from llm_autoeval.table import make_table, make_final_table
 from llm_autoeval.upload import upload_to_github_gist
 
 MODEL = 'abacusai/Smaug-72B-v0.1'
-GITHUB_API_TOKEN = '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'
+GITHUB_API_TOKEN = 'ghp_xxxx'
 
 def main(directory: str, elapsed_time: float) -> None:
     file_path = "result.log"

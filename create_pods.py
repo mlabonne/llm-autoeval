@@ -18,6 +18,7 @@ DEBUG = False # @param {type:"boolean"}
 RUNPOD_TOKEN = sys.argv[4] #"runpod" # @param {type:"string"}
 GITHUB_TOKEN = sys.argv[5] #"github" # @param {type:"string"}
 HF_TOKEN = sys.argv[6]
+RUNPOD_TEMPLATE = sys.argv[7] #if template id==6p59tg6cln, one-template-for-all-steps, e.g. download model, auto-eval, upload-results; if id==6rhltjf914, the script only download model; #bash -c 'cd /workspace/; git clone https://github.com/chenhaodev/llm-autoeval; cd /workspace/llm-autoeval/; sh auto-eval.sh' #template_id="au6nz6emhk",
 
 # Environment variables
 runpod.api_key = RUNPOD_TOKEN
@@ -41,7 +42,7 @@ pod = runpod.create_pod(
         "GITHUB_API_TOKEN": GITHUB_API_TOKEN,
         "HF_TOKEN": HF_TOKEN,
     },
-    template_id='6p59tg6cln', #bash -c 'cd /workspace/; git clone https://github.com/chenhaodev/llm-autoeval; cd /workspace/llm-autoeval/; sh auto-eval.sh' #template_id="au6nz6emhk",
+    template_id=RUNPOD_TEMPLATE, 
 )
 
 print("Pod started: https://www.runpod.io/console/pods")

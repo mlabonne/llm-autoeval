@@ -18,7 +18,7 @@ cd /workspace/; mkdir -p cache model; git clone https://github.com/chenhaodev/lm
 pip install huggingface_hub; huggingface-cli login --token $HF_TOKEN; huggingface-cli download --resume-download $MODEL --local-dir /workspace/model --local-dir-use-symlinks False --cache-dir /workspace/cache;
 
 lm_eval --model hf \
-    --model_args pretrained=/workspace/model,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True \
+    --model_args pretrained=/workspace/model,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=True,load_in_4bit=True \
     --tasks ocn,aocnp,medmcqa,pubmedqa,mmlu_clinical_knowledge,mmlu_college_medicine,mmlu_professional_medicine \
     --device cuda:0 \
     --batch_size auto \

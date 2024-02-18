@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sh base-auto-train.sh
+
 start=$(date +%s)
 
 # Detect the number of NVIDIA GPUs and create a device string

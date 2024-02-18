@@ -12,7 +12,6 @@ fi
 # Install dependencies
 apt update
 apt install -y screen vim git-lfs
-screen
 
 # Run evaluation
 cd /workspace/; mkdir -p cache model; git clone https://github.com/chenhaodev/lm-evaluation-harness; cd lm-evaluation-harness; pip install -e .;
@@ -29,7 +28,7 @@ lm_eval --model hf \
 end=$(date +%s)
 echo "Elapsed Time: $(($end-$start)) seconds" >> ./result.log
 
-cd /workspace/; python /workspace/llm-autoeval/upload-result.py . $(($end-$start))
+echo "cd /workspace/; python /workspace/llm-autoeval/upload-result.py . $(($end-$start))"
 
 #if [ "$DEBUG" == "False" ]; then
 #    runpodctl remove pod $RUNPOD_POD_ID

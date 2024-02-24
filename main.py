@@ -10,7 +10,7 @@ from llm_autoeval.upload import upload_to_github_gist
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-MODEL = os.getenv("MODEL")
+MODEL_ID = os.getenv("MODEL_ID")
 BENCHMARK = os.getenv("BENCHMARK")
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
 
@@ -61,12 +61,12 @@ def main(directory: str, elapsed_time: float) -> None:
     summary += f"\n\nElapsed time: {convert}"
 
     # Generate final table
-    final_table = make_final_table(result_dict, MODEL)
+    final_table = make_final_table(result_dict, MODEL_ID)
     summary = final_table + "\n" + summary
 
     # Upload to GitHub Gist
     upload_to_github_gist(
-        summary, f"{MODEL.split('/')[-1]}-{BENCHMARK.capitalize()}.md", GITHUB_API_TOKEN
+        summary, f"{MODEL_ID.split('/')[-1]}-{BENCHMARK.capitalize()}.md", GITHUB_API_TOKEN
     )
 
 

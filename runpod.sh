@@ -98,14 +98,14 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --batch_size auto \
         --output_path ./${benchmark}.json
 
-    # benchmark="mmlu"
-    # lm_eval --model vllm \
-    #     --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
-    #     --tasks mmlu \
-    #     --num_fewshot 5 \
-    #     --batch_size auto \
-    #     --verbosity DEBUG \
-    #     --output_path ./${benchmark}.json
+    benchmark="mmlu"
+    lm_eval --model vllm \
+        --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks mmlu \
+        --num_fewshot 5 \
+        --batch_size auto \
+        --verbosity DEBUG \
+        --output_path ./${benchmark}.json
     
     benchmark="truthfulqa"
     lm_eval --model vllm \

@@ -160,10 +160,10 @@ else
         --tasks ${BENCHMARK} \
         --num_fewshot ${NUM_FEWSHOT} \
         --batch_size auto \
-        --output_path ./${benchmark}.json
+        --output_path ./${BENCHMARK}.json
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
-    cat ./${benchmark}.json
+    cat ./${BENCHMARK}.json
     python ../llm-autoeval/main.py . $(($end-$start))
     #echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

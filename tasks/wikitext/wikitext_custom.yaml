@@ -1,8 +1,5 @@
-
 task: wikitext_custom
 dataset_path: wikitext
-
-
 dataset_name: wikitext-2-raw-v1
 output_type: loglikelihood_rolling
 training_split: train
@@ -23,3 +20,5 @@ metric_list:
   - metric: bits_per_byte
 metadata:
   - version: 2.0
+
+num_fewshot: 0

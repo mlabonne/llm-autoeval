@@ -151,9 +151,6 @@ else
     echo "lm-evaluation-harness/lm_eval/tasks/"
     ls -l lm-evaluation-harness/lm_eval/tasks/
 
-    echo "lm-evaluation-harness/lm_eval/tasks/arcee"
-    ls -l lm-evaluation-harness/lm_eval/tasks/arcee
-
     cd lm-evaluation-harness
     python -m pip install --upgrade pip
     pip install -e .
@@ -161,11 +158,12 @@ else
     python -m lm_eval --verbosity DEBUG --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks ${BENCHMARK} \
-        --num_fewshot 0 \
+        --num_fewshot ${NUM_FEWSHOT} \
         --batch_size auto \
         --output_path ./${benchmark}.json
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
+    less ./${benchmark}.json
     python ../llm-autoeval/main.py . $(($end-$start))
     #echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

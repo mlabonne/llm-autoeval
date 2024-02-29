@@ -17,7 +17,7 @@ apt install -y screen vim git-lfs
 
 # Run evaluation
 cd /workspace/; mkdir -p cache model; git clone https://github.com/chenhaodev/lm-evaluation-harness; cd lm-evaluation-harness; pip install -e .;
-pip install transformers_stream_generator einops bitsandbyte tiktoken;
+pip install transformers_stream_generator einops bitsandbytes tiktoken;
 pip install huggingface_hub; huggingface-cli login --token $HF_TOKEN; huggingface-cli download --resume-download $MODEL --local-dir /workspace/model --local-dir-use-symlinks False --cache-dir /workspace/cache;
 
 lm_eval --model hf \

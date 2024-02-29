@@ -1,0 +1,16 @@
+task: medmcqa
+dataset_path: medmcqa
+#dataset_name: pubmed_qa_labeled_fold0_source
+output_type: multiple_choice
+training_split: train
+validation_split: validation
+test_split: validation
+doc_to_text: !function preprocess_medmcqa.doc_to_text
+doc_to_target: !function preprocess_medmcqa.doc_to_target
+doc_to_choice: !function preprocess_medmcqa.doc_to_choice
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  - version: 1.0

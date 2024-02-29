@@ -1,0 +1,24 @@
+group:
+  - arcee
+
+task: pubmed_processed
+
+dataset_path: parquet
+dataset_name: null
+dataset_kwargs:
+  data_files:
+    test: s3://shamane-siri-output/pubmed_only.parquet/part-00299-786fa4aa-d990-455d-8143-eab9ef9a48e1-c000.snappy.parquet
+
+output_type: loglikelihood_rolling
+training_split: null
+validation_split: null
+test_split: test
+fewshot_split: null
+
+
+process_docs: !function preprocess_pubmed.process_docs
+doc_to_text: ""
+doc_to_target: text
+
+metadata:
+  - version: 2.0

@@ -1,0 +1,25 @@
+
+task: wikitext_custom
+dataset_path: wikitext
+
+
+dataset_name: wikitext-2-raw-v1
+output_type: loglikelihood_rolling
+training_split: train
+validation_split: validation
+test_split: test
+
+process_docs: !function preprocess_wikitext.process_docs
+doc_to_text: ""
+doc_to_target: !function preprocess_wikitext.wikitext_detokenizer_custom
+
+process_results: !function preprocess_wikitext.process_results_custom
+should_decontaminate: true
+doc_to_decontamination_query: "{{text}}"
+
+metric_list:
+  - metric: word_perplexity
+  - metric: byte_perplexity
+  - metric: bits_per_byte
+metadata:
+  - version: 2.0

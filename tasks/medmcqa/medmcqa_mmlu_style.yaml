@@ -1,0 +1,22 @@
+task: medmcqa_mmlu_prompt
+dataset_path: medmcqa
+
+#fewshot_split: dev
+#fewshot_config:
+#  sampler: first_n
+
+num_fewshot: 0
+
+output_type: multiple_choice
+training_split: train
+validation_split: validation
+test_split: validation
+doc_to_text: !function preprocess_medmcqa.doc_to_text_mmlu_style
+doc_to_target: !function preprocess_medmcqa.doc_to_target_mmlu_style
+doc_to_choice: ["A", "B", "C", "D"]
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  - version: 1.0

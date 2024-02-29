@@ -26,7 +26,7 @@ export AWS_ACCESS_KEY_ID="$ARCEE_AWS_ACCESS_KEY_ID"
 export AWS_SECRET_ACCESS_KEY="$ARCEE_AWS_SECRET_ACCESS_KEY"
 export AWS_DEFAULT_REGION=us-east-2
 
-echo $AWS_ACCESS_KEY_ID
+echo "aws key:" "$AWS_ACCESS_KEY_ID"
 
 # Install common libraries
 pip install -q requests accelerate sentencepiece pytablewriter einops protobuf
@@ -144,8 +144,9 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     
     python ../llm-autoeval/main.py . $(($end-$start))
 else
+    echo "Current folder: "
+    ls -l
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-
     mkdir lm-evaluation-harness/lm_eval/tasks/arcee
     cp tasks/* lm-evaluation-harness/lm_eval/tasks/
 

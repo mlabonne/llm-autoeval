@@ -22,6 +22,12 @@ apt update
 apt install -y screen vim git-lfs
 screen
 
+export AWS_ACCESS_KEY_ID="$ARCEE_AWS_ACCESS_KEY_ID"
+export AWS_SECRET_ACCESS_KEY="$ARCEE_AWS_SECRET_ACCESS_KEY"
+export AWS_DEFAULT_REGION=us-east-2
+
+echo $AWS_ACCESS_KEY_ID
+
 # Install common libraries
 pip install -q requests accelerate sentencepiece pytablewriter einops protobuf
 
@@ -138,7 +144,26 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     
     python ../llm-autoeval/main.py . $(($end-$start))
 else
-    echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
+    git clone https://github.com/EleutherAI/lm-evaluation-harness
+
+    mkdir lm-evaluation-harness/lm_eval/tasks/arcee
+    cp tasks/* lm-evaluation-harness/lm_eval/tasks/
+
+    cd lm-evaluation-harness
+    pip install -e .
+
+    python main.py --model hf \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --tasks ${BENCHMARK} \
+        --num_fewshot 0 \
+        --batch_size auto \
+        --output_path ./${benchmark}.json
+    end=$(date +%s)
+    echo "Elapsed Time: $(($end-$start)) seconds"
+    pwd
+    ls ../
+    python ../llm-autoeval/main.py . $(($end-$start))
+    #echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi
 
 if [ "$DEBUG" == "False" ]; then

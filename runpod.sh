@@ -144,11 +144,12 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     
     python ../llm-autoeval/main.py . $(($end-$start))
 else
-    echo "Current folder: "
-    ls -l
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-    mkdir lm-evaluation-harness/lm_eval/tasks/arcee
-    cp tasks/* lm-evaluation-harness/lm_eval/tasks/
+    mkdir lm-evaluation-harness/lm_eval/tasks/
+    cp llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
+
+    echo "lm-evaluation-harness/lm_eval/tasks/"
+    ls -l lm-evaluation-harness/lm_eval/tasks/
 
     cd lm-evaluation-harness
     pip install -e .
@@ -161,8 +162,6 @@ else
         --output_path ./${benchmark}.json
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
-    pwd
-    ls ../
     python ../llm-autoeval/main.py . $(($end-$start))
     #echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

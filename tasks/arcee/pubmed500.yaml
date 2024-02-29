@@ -26,4 +26,4 @@ doc_to_target: !function preprocess_pubmed.doc_to_text_pubmed500
 #  - metric: bits_per_byte
 
 metadata:
-  - version: 2.0
+  version: 2.0

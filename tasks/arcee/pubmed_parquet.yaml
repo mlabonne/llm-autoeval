@@ -21,4 +21,4 @@ doc_to_text: ""
 doc_to_target: text
 
 metadata:
-  - version: 2.0
+  version: 2.0

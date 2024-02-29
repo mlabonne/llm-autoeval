@@ -163,7 +163,7 @@ else
         --output_path ./${benchmark}.json
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
-    less ./${benchmark}.json
+    cat ./${benchmark}.json
     python ../llm-autoeval/main.py . $(($end-$start))
     #echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

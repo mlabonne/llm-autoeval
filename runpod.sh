@@ -146,15 +146,19 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 else
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     mkdir lm-evaluation-harness/lm_eval/tasks/
-    cp llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
+    cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
 
     echo "lm-evaluation-harness/lm_eval/tasks/"
     ls -l lm-evaluation-harness/lm_eval/tasks/
 
+    echo "lm-evaluation-harness/lm_eval/tasks/arcee"
+    ls -l lm-evaluation-harness/lm_eval/tasks/arcee
+
     cd lm-evaluation-harness
+    python -m pip install --upgrade pip
     pip install -e .
 
-    python main.py --model hf \
+    python -m lm_eval --verbosity DEBUG --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks ${BENCHMARK} \
         --num_fewshot 0 \

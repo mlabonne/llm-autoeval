@@ -79,11 +79,13 @@ if [ "$BENCHMARK" == "nous" ]; then
 elif [ "$BENCHMARK" == "openllm" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     cd lm-evaluation-harness
+    python -m pip install --upgrade pip
     pip install -e .
+    pip install --upgrade vllm
     pip install langdetect immutabledict
 
     benchmark="arc"
-    lm_eval --model hf \
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks arc_challenge \
         --num_fewshot 25 \
@@ -91,24 +93,24 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="hellaswag"
-    lm_eval --model hf \
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks hellaswag \
         --num_fewshot 10 \
         --batch_size auto \
         --output_path ./${benchmark}.json
 
-    benchmark="mmlu"
-    lm_eval --model hf \
-        --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
-        --tasks mmlu \
-        --num_fewshot 5 \
-        --batch_size auto \
-        --verbosity DEBUG \
-        --output_path ./${benchmark}.json
+    # benchmark="mmlu"
+    # lm_eval --model vllm \
+    #    --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
+    #    --tasks mmlu \
+    #    --num_fewshot 5 \
+    #    --batch_size auto \
+    #    --verbosity DEBUG \
+    #    --output_path ./${benchmark}.json
     
     benchmark="truthfulqa"
-    lm_eval --model hf \
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks truthfulqa \
         --num_fewshot 0 \
@@ -116,7 +118,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="winogrande"
-    lm_eval --model hf \
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks winogrande \
         --num_fewshot 5 \
@@ -124,7 +126,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="gsm8k"
-    lm_eval --model hf \
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks gsm8k \
         --num_fewshot 5 \

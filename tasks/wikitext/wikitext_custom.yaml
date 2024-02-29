@@ -18,7 +18,6 @@ metric_list:
   - metric: word_perplexity
   - metric: byte_perplexity
   - metric: bits_per_byte
-metadata:
-  - version: 2.0
 
-num_fewshot: 0
+metadata:
+  version: 2.0

@@ -56,7 +56,7 @@ def calculate_average(data, task):
             value = data["results"]["truthfulqa_mc"]["mc2"]
             return 0.0 if math.isnan(value) else value * 100
 
-    raise NotImplementedError(f"Could not find task {task} for benchmark {BENCHMARK}")
+    #raise NotImplementedError(f"Could not find task {task} for benchmark {BENCHMARK}")
 
 
 def make_table(result_dict, task):

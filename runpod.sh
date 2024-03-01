@@ -146,25 +146,26 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 else
 
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-    cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
-    pip install boto3
-    pip install rouge_score
-    pip install datasets
+    #pip install boto3
+    #pip install rouge_score
+    #pip install datasets
     #echo "lm-evaluation-harness/lm_eval/tasks/"
     #ls -l lm-evaluation-harness/lm_eval/tasks/
 
     cd llm-autoeval
+    pip install -e .
     SCRIPT_DIR="$(pwd)"
     echo "Current dir:" "$SCRIPT_DIR"
     ls -l
     python llm_autoeval/download.py --task "${BENCHMARK}" --out_dir "${SCRIPT_DIR}"
+    cat tasks/arcee/patents_ppl.yaml
     # shellcheck disable=SC2103
     cd ..
+    cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
 
     cd lm-evaluation-harness
     python -m pip install --upgrade pip
     pip install -e .
-    pip install s3fs
 
     python -m lm_eval --verbosity DEBUG --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \

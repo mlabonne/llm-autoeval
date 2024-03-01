@@ -1,4 +1,5 @@
 import argparse
+import importlib
 import os
 from pathlib import Path
 from typing import List, Iterable
@@ -16,6 +17,7 @@ DOWNLOAD_DIR = "~/data/"
 
 
 def download_file(s3_location: str, local_path: str) -> str:
+    print(f"Downloading {s3_location} to {local_path}")
     path = Path(s3_location)
     bucket = path.parts[1]
     key = path.parts[2:]
@@ -25,7 +27,8 @@ def download_file(s3_location: str, local_path: str) -> str:
     local_dir = Path(local_path, bucket, *extra_path)
     local_dir.mkdir(parents=True, exist_ok=True)
     local_file = Path(local_dir, filename)
-    s3_client.download_file(bucket, "/".join(key), local_file)
+    # s3_client.download_file(bucket, "/".join(key), local_file)
+    print(f"aws file downloaded as {local_file}")
     return str(local_file)
 
 
@@ -41,18 +44,31 @@ def check_s3_locations(cfg, local_path: str = DOWNLOAD_DIR):
             if isinstance(v, str):
                 cfg[k] = check_s3_location(v, local_path)
             elif isinstance(v, Iterable):
-                check_s3_locations(v)
+                check_s3_locations(v, local_path=local_path)
 
     elif isinstance(cfg, List):
         for i, v in enumerate(cfg):
             if isinstance(v, str):
                 cfg[i] = check_s3_location(v, local_path)
             elif isinstance(v, Iterable):
-                check_s3_locations(v)
+                check_s3_locations(v, local_path=local_path)
 
 
 def import_function(loader, node):
-    return None
+    function_name = loader.construct_scalar(node)
+    yaml_path = os.path.dirname(loader.name)
+
+    *module_name, function_name = function_name.split(".")
+    if type(module_name) == list:
+        module_name = ".".join(module_name)
+    module_path = os.path.normpath(os.path.join(yaml_path, "{}.py".format(module_name)))
+
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    function = getattr(module, function_name)
+    return function
 
 
 # Add the import_function constructor to the YAML loader
@@ -98,14 +114,14 @@ def load_yaml_config(yaml_path=None, yaml_config=None, yaml_dir=None):
     return yaml_config
 
 
-def main(yaml_file: str):
+def main(yaml_file: str, out_dir: str):
     print(f"Parsing yaml config {yaml_file}")
     config = load_yaml_config(yaml_file)
-    check_s3_locations(config['dataset_kwargs'])
+    check_s3_locations(config['dataset_kwargs'], local_path=out_dir)
     print(f"Processed Dataset config: {config['dataset_kwargs']}")
     # overwrite the original yaml file
-    with open('data.yml', 'w') as outfile:
-        yaml.dump(config, yaml_file, default_flow_style=False)
+    with open(yaml_file, 'w') as outfile:
+        yaml.dump(config, outfile, default_flow_style=False)
     print("Config saved")
 
 
@@ -113,6 +129,7 @@ if __name__ == "__main__":
     # Create the parser
     parser = argparse.ArgumentParser(description="Summarize results and upload them.")
     parser.add_argument("--task", type=str, help="The Harness task name")
+    parser.add_argument("--out_dir", type=str, help="Output location")
 
     # Parse the arguments
     args = parser.parse_args()
@@ -123,4 +140,4 @@ if __name__ == "__main__":
         if not os.path.isfile(file):
             raise ValueError(f"The task cfg file {file} does not exist.")
 
-        main(file)
+        main(file, args.out_dir)

@@ -152,10 +152,11 @@ else
     #ls -l lm-evaluation-harness/lm_eval/tasks/
 
     cd llm-autoeval
-    pwd
-    echo "Current dir:"
+    SCRIPT_DIR="$(pwd)"
+    echo "Current dir:" "$SCRIPT_DIR"
     ls -l
-    python llm_autoeval/download.py --task ${BENCHMARK}
+    python llm_autoeval/download.py --task "${BENCHMARK}" --out_dir "${SCRIPT_DIR}"
+    # shellcheck disable=SC2103
     cd ..
 
     cd lm-evaluation-harness

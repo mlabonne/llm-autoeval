@@ -160,6 +160,7 @@ else
     python llm_autoeval/download.py --task "${BENCHMARK}" --out_dir "${SCRIPT_DIR}"
     cat tasks/arcee/patents_ppl.yaml
     # shellcheck disable=SC2103
+    ls -l /llm-autoeval/arcee-catch-all/
     cd ..
     cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
 

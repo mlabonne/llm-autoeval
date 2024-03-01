@@ -27,7 +27,7 @@ def download_file(s3_location: str, local_path: str) -> str:
     local_dir = Path(local_path, bucket, *extra_path)
     local_dir.mkdir(parents=True, exist_ok=True)
     local_file = Path(local_dir, filename)
-    # s3_client.download_file(bucket, "/".join(key), local_file)
+    s3_client.download_file(bucket, "/".join(key), local_file)
     print(f"aws file downloaded as {local_file}")
     return str(local_file)
 

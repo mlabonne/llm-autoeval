@@ -32,9 +32,9 @@ def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
     # remove empty desciptions
     print(f"Original ds ={dataset}")
     filtered = dataset.filter(lambda example: len(example["description"]) > 0)
-    print(f"Filtered ds {filtered}")
     filtered = filtered.select(range(2000))
-    return filtered
+    print(f"Filtered ds {filtered}")
+    return filtered.map(preprocess_function_gen)
 
 
 def process_docs_gen(dataset: datasets.Dataset) -> datasets.Dataset:
@@ -85,6 +85,7 @@ def preprocess_function_gen(example):
     return {
         # "question": "",
         "correct_answers": [correct_answer],
+        "abstract": correct_answer,
         # "incorrect_answers": incorrect_answers,
         'description': description
     }

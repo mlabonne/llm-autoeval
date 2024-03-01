@@ -37,7 +37,6 @@ def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
 
 
 def process_docs_gen(dataset: datasets.Dataset) -> datasets.Dataset:
-    dataset = dataset.select(range(4))
     # remove empty descriptions
     print(f"Original ds ={dataset}")
     filtered = dataset.filter(lambda example: len(example["description"]) > 0)

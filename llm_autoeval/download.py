@@ -51,6 +51,14 @@ def check_s3_locations(cfg, local_path: str = DOWNLOAD_DIR):
                 check_s3_locations(v)
 
 
+def import_function(loader, node):
+    return None
+
+
+# Add the import_function constructor to the YAML loader
+yaml.add_constructor("!function", import_function)
+
+
 def load_yaml_config(yaml_path=None, yaml_config=None, yaml_dir=None):
     if yaml_config is None:
         with open(yaml_path, "rb") as file:
@@ -93,8 +101,8 @@ def load_yaml_config(yaml_path=None, yaml_config=None, yaml_dir=None):
 def main(yaml_file: str):
     print(f"Parsing yaml config {yaml_file}")
     config = load_yaml_config(yaml_file)
-    check_s3_locations(config.dataset_kwargs)
-    print(f"Processed Dataset config: {config.dataset_kwargs}")
+    check_s3_locations(config['dataset_kwargs'])
+    print(f"Processed Dataset config: {config['dataset_kwargs']}")
     # overwrite the original yaml file
     with open('data.yml', 'w') as outfile:
         yaml.dump(config, yaml_file, default_flow_style=False)

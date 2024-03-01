@@ -155,9 +155,7 @@ else
     pwd
     echo "Current dir:"
     ls -l
-    echo "inside llm-autoeval"
-    ls -l llm-autoeval
-    python llm-autoeval/download.py --task ${BENCHMARK}
+    python llm_autoeval/download.py --task ${BENCHMARK}
     cd ..
 
     cd lm-evaluation-harness

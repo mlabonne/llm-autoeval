@@ -151,8 +151,13 @@ else
     #echo "lm-evaluation-harness/lm_eval/tasks/"
     #ls -l lm-evaluation-harness/lm_eval/tasks/
 
+    cd llm-autoeval
     echo "Current dir:"
     ls -l
+
+    echo "inside llm-autoeval"
+    ls -l llm-autoeval/
+    
     python llm-autoeval/download.py --task ${BENCHMARK}
     cd ..
 

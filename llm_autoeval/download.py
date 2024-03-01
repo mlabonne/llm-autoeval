@@ -116,12 +116,25 @@ def load_yaml_config(yaml_path=None, yaml_config=None, yaml_dir=None):
 
 def main(yaml_file: str, out_dir: str):
     print(f"Parsing yaml config {yaml_file}")
-    config = load_yaml_config(yaml_file)
-    check_s3_locations(config['dataset_kwargs'], local_path=out_dir)
-    print(f"Processed Dataset config: {config['dataset_kwargs']}")
+    # config = load_yaml_config(yaml_file)
+    with open(yaml_file, "r") as f:
+        config_lines = f.readlines()
+    new_cfg_lines = []
+    for line in config_lines:
+        param_kv = line.split(": ")
+        if len(param_kv) > 1:
+            val = param_kv[1].strip()
+            new_val = check_s3_location(val, out_dir)
+            line = line.replace(val, new_val)
+
+        new_cfg_lines.append(line)
+
+    # check_s3_locations(config['dataset_kwargs'], local_path=out_dir)
+    print(f"Processed Dataset config: {new_cfg_lines}")
     # overwrite the original yaml file
     with open(yaml_file, 'w') as outfile:
-        yaml.dump(config, outfile, default_flow_style=False)
+        #yaml.dump(config, outfile, default_flow_style=False)
+        outfile.writelines(new_cfg_lines)
     print("Config saved")
 
 

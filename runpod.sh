@@ -146,14 +146,14 @@ elif [ "$BENCHMARK" == "openllm" ]; then
 else
 
     git clone https://github.com/EleutherAI/lm-evaluation-harness
-    #pip install boto3
-    #pip install rouge_score
-    #pip install datasets
+    # TODO: move to reqs
+    pip install boto3
+    pip install rouge_score
+    pip install datasets
     #echo "lm-evaluation-harness/lm_eval/tasks/"
     #ls -l lm-evaluation-harness/lm_eval/tasks/
 
     cd llm-autoeval
-    pip install -e .
     SCRIPT_DIR="$(pwd)"
     echo "Current dir:" "$SCRIPT_DIR"
     ls -l

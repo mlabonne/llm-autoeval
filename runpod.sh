@@ -167,17 +167,25 @@ else
     cd lm-evaluation-harness
     python -m pip install --upgrade pip
     pip install -e .
-    pip install --upgrade vllm
-    pip install langdetect immutabledict
-
-    #python -m lm_eval --verbosity DEBUG --model hf \
-    # tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size}
-    lm_eval --model vllm \
-        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
-        --tasks ${BENCHMARK} \
-        --num_fewshot ${NUM_FEWSHOT} \
-        --batch_size auto \
-        --output_path ./${BENCHMARK}.json
+    echo "USE_VLLM =" "$USE_VLLM"
+    if [ "$USE_VLLM" == "True" ]; then
+      pip install --upgrade vllm
+      pip install langdetect immutabledict
+      # tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size}
+      lm_eval --model vllm \
+          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+          --tasks ${BENCHMARK} \
+          --num_fewshot ${NUM_FEWSHOT} \
+          --batch_size auto \
+          --output_path ./${BENCHMARK}.json
+    else
+      python -m lm_eval --verbosity DEBUG --model hf \
+          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=${PARALELLIZE} \
+          --tasks ${BENCHMARK} \
+          --num_fewshot ${NUM_FEWSHOT} \
+          --batch_size auto \
+          --output_path ./${BENCHMARK}.json
+    fi
     end=$(date +%s)
     echo "Elapsed Time: $(($end-$start)) seconds"
     cat ./${BENCHMARK}.json

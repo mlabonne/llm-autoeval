@@ -8,7 +8,6 @@ dataset_name: null
 dataset_kwargs:
   data_files:
     test: s3://arcee-catch-all/new_patents_abstract_gen.parquet
-    #test: /home/ubuntu/src/data/new_patents_abstract_gen.parquet
 
 output_type: generate_until
 

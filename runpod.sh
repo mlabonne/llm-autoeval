@@ -160,7 +160,7 @@ else
     python llm_autoeval/download.py --task "${BENCHMARK}" --out_dir "${SCRIPT_DIR}"
     # shellcheck disable=SC2103
     cd ..
-    #cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
+    cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
 
     cd lm-evaluation-harness
     python -m pip install --upgrade pip

@@ -171,9 +171,9 @@ else
     pip install langdetect immutabledict
 
     #python -m lm_eval --verbosity DEBUG --model hf \
-
+    # tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size}
     lm_eval --model vllm \
-        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size} \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks ${BENCHMARK} \
         --num_fewshot ${NUM_FEWSHOT} \
         --batch_size auto \

@@ -43,7 +43,9 @@ def process_docs_gen(dataset: datasets.Dataset) -> datasets.Dataset:
     filtered = dataset.filter(lambda example: len(example["description"]) > 0)
     print(f"Filtered ds ={filtered}")
     filtered = filtered.select(range(2000))
-    return filtered.map(preprocess_function_gen)
+    filtered = filtered.map(preprocess_function_gen)
+    print(f"Processed ds ={filtered}")
+    return filtered
 
 
 def preprocess_function_gen(example):

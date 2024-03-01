@@ -144,6 +144,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     
     python ../llm-autoeval/main.py . $(($end-$start))
 else
+    pip install -U "huggingface_hub[cli]"
+    huggingface-cli login --token "$HF_TOKEN"
 
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     # TODO: move to reqs

@@ -148,6 +148,8 @@ else
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     cp -r llm-autoeval/tasks/* lm-evaluation-harness/lm_eval/tasks/
     pip install boto3
+    pip install rouge_score
+    pip install datasets
     #echo "lm-evaluation-harness/lm_eval/tasks/"
     #ls -l lm-evaluation-harness/lm_eval/tasks/
 

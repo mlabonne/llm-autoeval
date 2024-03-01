@@ -28,6 +28,15 @@ def doc_to_target(doc):
     return doc['abstract']
 
 
+def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
+    # remove empty desciptions
+    print(f"Original ds ={dataset}")
+    filtered = dataset.filter(lambda example: len(example["description"]) > 0)
+    print(f"Filtered ds {filtered}")
+    filtered = filtered.select(range(2000))
+    return filtered
+
+
 def process_docs_gen(dataset: datasets.Dataset) -> datasets.Dataset:
     dataset = dataset.select(range(4))
     # remove empty descriptions

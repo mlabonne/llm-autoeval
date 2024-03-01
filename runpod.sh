@@ -173,7 +173,7 @@ else
     #python -m lm_eval --verbosity DEBUG --model hf \
 
     lm_eval --model vllm \
-        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+        --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size} \
         --tasks ${BENCHMARK} \
         --num_fewshot ${NUM_FEWSHOT} \
         --batch_size auto \

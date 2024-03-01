@@ -165,8 +165,12 @@ else
     cd lm-evaluation-harness
     python -m pip install --upgrade pip
     pip install -e .
+    pip install --upgrade vllm
+    pip install langdetect immutabledict
 
-    python -m lm_eval --verbosity DEBUG --model hf \
+    #python -m lm_eval --verbosity DEBUG --model hf \
+
+    lm_eval --model vllm \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks ${BENCHMARK} \
         --num_fewshot ${NUM_FEWSHOT} \

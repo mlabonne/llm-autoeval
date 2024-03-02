@@ -168,17 +168,22 @@ else
     python -m pip install --upgrade pip
     pip install -e .
     echo "USE_VLLM =" "$USE_VLLM"
+    echo "tensor_parallel_size =" "$tensor_parallel_size"
+    echo "data_parallel_size =" "$data_parallel_size"
+
     if [ "$USE_VLLM" == "True" ]; then
       pip install --upgrade vllm
       pip install langdetect immutabledict
       # tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size}
+      echo "Running vllm eval"
       lm_eval --model vllm \
-          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
+          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size} \
           --tasks ${BENCHMARK} \
           --num_fewshot ${NUM_FEWSHOT} \
           --batch_size auto \
           --output_path ./${BENCHMARK}.json
     else
+      echo "Running HF eval"
       python -m lm_eval --verbosity DEBUG --model hf \
           --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=${PARALELLIZE} \
           --tasks ${BENCHMARK} \

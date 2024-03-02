@@ -170,7 +170,7 @@ else
     echo "USE_VLLM =" "$USE_VLLM"
     echo "tensor_parallel_size =" "$tensor_parallel_size"
     echo "data_parallel_size =" "$data_parallel_size"
-    echo "PARALELLIZE =" "$PARALELLIZE"
+    echo "PARALLELLIZE =" "$PARALLELLIZE"
 
     if [ "$USE_VLLM" == "True" ]; then
       pip install --upgrade vllm
@@ -185,8 +185,10 @@ else
           --output_path ./${BENCHMARK}.json
     else
       echo "Running HF eval"
-      python main.py --verbosity DEBUG --model hf \
-          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=${PARALELLIZE} \
+      #python main.py --verbosity DEBUG --model hf \
+      ls -l
+      lm_eval --verbosity DEBUG --model hf \
+          --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE,parallelize=${PARALLELLIZE} \
           --tasks ${BENCHMARK} \
           --num_fewshot ${NUM_FEWSHOT} \
           --batch_size auto \

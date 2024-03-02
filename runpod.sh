@@ -172,6 +172,7 @@ else
     echo "data_parallel_size =" "$data_parallel_size"
     echo "PARALLELIZE =" "$PARALLELLIZE"
     echo "DTYPE =" "${DTYPE}"
+    echo "BATCH_SIZE =" "${BATCH_SIZE}"
 
     if [ "$USE_VLLM" == "True" ]; then
       pip install --upgrade vllm
@@ -180,10 +181,10 @@ else
       echo "Running vllm eval"
       lm_eval --model vllm \
           --verbosity DEBUG \
-          --model_args pretrained=${MODEL_ID},dtype=${DTYPE},trust_remote_code=$TRUST_REMOTE_CODE,tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size} \
+          --model_args pretrained=${MODEL_ID},dtype=${DTYPE},trust_remote_code=$TRUST_REMOTE_CODE,tensor_parallel_size=${TENSOR_PARALLEL_SIZE},data_parallel_size=${DATA_PARALLEL_SIZE} \
           --tasks ${BENCHMARK} \
           --num_fewshot ${NUM_FEWSHOT} \
-          --batch_size auto \
+          --batch_size ${BATCH_SIZE} \
           --output_path ./${BENCHMARK}.json
     else
       echo "Running HF eval"
@@ -192,7 +193,7 @@ else
           --model_args pretrained=${MODEL_ID},dtype=${DTYPE},trust_remote_code=$TRUST_REMOTE_CODE,parallelize=${PARALLELLIZE} \
           --tasks ${BENCHMARK} \
           --num_fewshot ${NUM_FEWSHOT} \
-          --batch_size auto \
+          --batch_size ${BATCH_SIZE} \
           --output_path ./${BENCHMARK}.json
     fi
     end=$(date +%s)

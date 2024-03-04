@@ -1,0 +1,56 @@
+group:
+  - arcee
+
+task: patents_qa_rouge
+
+dataset_path: parquet
+dataset_name: null
+dataset_kwargs:
+  data_files:
+    test: s3://arcee-catch-all/patents_qa.parquet
+
+output_type: generate_until
+
+training_split: null
+validation_split: null
+test_split: test
+fewshot_split: test
+num_fewshot: 0
+
+doc_to_text: !function patents.doc_to_text_qa
+doc_to_target: ""
+
+#process_docs: !function patents.process_docs_gen
+process_results: !function patents.process_qa_results_gen
+
+metric_list:
+  - metric: rouge1_max
+    aggregation: mean
+    higher_is_better: true
+  #- metric: rouge1_acc
+  #  aggregation: mean
+  #  higher_is_better: true
+  #- metric: rouge1_diff
+  #  aggregation: mean
+  #  higher_is_better: true
+  - metric: rouge2_max
+    aggregation: mean
+    higher_is_better: true
+  #- metric: rouge2_acc
+  #  aggregation: mean
+  #  higher_is_better: true
+  #- metric: rouge2_diff
+  #  aggregation: mean
+  #  higher_is_better: true
+  - metric: rougeL_max
+    aggregation: mean
+    higher_is_better: true
+  #- metric: rougeL_acc
+  #  aggregation: mean
+  #  higher_is_better: true
+  #- metric: rougeL_diff
+  #  aggregation: mean
+  #  higher_is_better: true
+
+metadata:
+  version: 2.0

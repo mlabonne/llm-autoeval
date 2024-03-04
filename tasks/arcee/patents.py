@@ -50,7 +50,7 @@ def process_docs_qa(dataset: datasets.Dataset) -> datasets.Dataset:
 
 
 def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
-    # remove empty desciptions
+    # remove empty descriptions
     print(f"Original ds ={dataset}")
     filtered = dataset.filter(lambda example: len(example["description"]) > 0)
     print(f"Filtered ds {filtered}")
@@ -119,7 +119,19 @@ def process_results_gen(doc, results):
     all_refs = true_refs  # + false_refs
 
     # Process the sentence-level BLEURT, BLEU, and ROUGE for similarity measures.
+    return calc_gen_scores(completion, all_refs, true_refs)
 
+
+def process_qa_results_gen(doc, results):
+    completion = results[0]
+    true_refs, false_refs = doc["answer"], None  # , doc["incorrect_answers"]
+    all_refs = true_refs  # + false_refs
+
+    # Process the sentence-level BLEURT, BLEU, and ROUGE for similarity measures.
+    return calc_gen_scores(completion, all_refs, true_refs)
+
+
+def calc_gen_scores(completion, all_refs, true_refs):
     # ROUGE-N
     rouge_scores = [rouge([ref], [completion]) for ref in all_refs]
     # ROUGE-1

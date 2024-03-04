@@ -168,8 +168,8 @@ else
     python -m pip install --upgrade pip
     pip install -e .
     echo "USE_VLLM =" "$USE_VLLM"
-    echo "tensor_parallel_size =" "$tensor_parallel_size"
-    echo "data_parallel_size =" "$data_parallel_size"
+    echo "tensor_parallel_size =" "$TENSOR_PARALLEL_SIZE"
+    echo "data_parallel_size =" "$DATA_PARALLEL_SIZE"
     echo "PARALLELIZE =" "$PARALLELLIZE"
     echo "DTYPE =" "${DTYPE}"
     echo "BATCH_SIZE =" "${BATCH_SIZE}"

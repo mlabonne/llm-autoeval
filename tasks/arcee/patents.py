@@ -57,6 +57,23 @@ def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
     return filtered.map(preprocess_function_gen)
 
 
+def process_docs_qa(dataset: datasets.Dataset) -> datasets.Dataset:
+    # remove empty descriptions
+    print(f"Original ds ={dataset}")
+    for s in dataset:
+        prompt = doc_to_text_qa(s)
+        a_len = len(s["answer"])
+        d_len = len(prompt)
+        context = s["context"]
+        while (d_len + a_len) > max_length_chars:  # shrink desc
+            reduce_estimate = (d_len + a_len) - max_length_chars
+            context = context[:-reduce_estimate]
+            prompt = doc_to_text_qa(s)
+            d_len = len(prompt)
+        s["context"] = context
+    return dataset
+
+
 def process_docs_gen(dataset: datasets.Dataset) -> datasets.Dataset:
     # remove empty descriptions
     print(f"Original ds ={dataset}")

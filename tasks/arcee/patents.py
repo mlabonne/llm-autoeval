@@ -28,6 +28,27 @@ def doc_to_target(doc):
     return doc['abstract']
 
 
+def doc_to_text_qa(doc):
+    context = doc['context']
+    question = doc['question']
+    d_len = len(context)
+    a_len = len(doc['answer'])
+    if (d_len + a_len) > max_length_chars:
+        print(f"WARN: d_len={d_len} a_len={a_len}")
+    return f"The following is a patent description and a question to be answered. Description: {context}. Question: {question}. Answer: "
+
+
+def doc_to_target_qa(doc):
+    return doc['answer']
+
+
+def process_docs_qa(dataset: datasets.Dataset) -> datasets.Dataset:
+    print(f"Original ds ={dataset}")
+    filtered = dataset.filter(lambda example: len(example["description"]) > 0)
+    print(f"Filtered ds {filtered}")
+    return filtered.map(preprocess_function_gen)
+
+
 def process_docs(dataset: datasets.Dataset) -> datasets.Dataset:
     # remove empty desciptions
     print(f"Original ds ={dataset}")

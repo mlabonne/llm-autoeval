@@ -177,7 +177,6 @@ else
     if [ "$USE_VLLM" == "True" ]; then
       pip install --upgrade vllm
       pip install langdetect immutabledict
-      # tensor_parallel_size=${tensor_parallel_size},data_parallel_size=${data_parallel_size}
       echo "Running vllm eval"
       lm_eval --model vllm \
           --verbosity DEBUG \

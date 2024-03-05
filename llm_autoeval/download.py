@@ -11,6 +11,8 @@ TASK_DIR = "tasks"
 TASK_TO_CFG_MAP = {
     "patents_gen_abstract": f"{TASK_DIR}/arcee/patents_ppl.yaml",
     "patents_gen_abstract_rouge": f"{TASK_DIR}/arcee/patents_rouge.yaml",
+    "patents_qa_ppl": f"{TASK_DIR}/arcee/patents_qa_ppl.yaml",
+    "patents_qa_rouge": f"{TASK_DIR}/arcee/patents_qa_rouge.yaml",
 }
 
 DOWNLOAD_DIR = "~/data/"

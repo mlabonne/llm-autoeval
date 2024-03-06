@@ -17,7 +17,7 @@
 
 ## 🔍 Overview
 
-LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/1Igs3WZuXAIv9X0vwqiE90QlEPys8e8Oa?usp=sharing). You just need to specify the name of your model, a GPU, and press run!
+LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [Colab notebook](https://colab.research.google.com/drive/164LsJ5mfCaaBrWhP6eHWJyy9jRmaJZ7l?usp=sharing). You just need to specify the name of your model, a GPU, and press run!
 
 ### Key Features
 
@@ -25,7 +25,7 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 * Customizable evaluation parameters for tailored benchmarking.
 * Summary generation and upload to [GitHub Gist](https://gist.github.com/) for easy sharing and reference.
 
-[View a sample summary here.](https://gist.github.com/mlabonne/ad0c665bbe581c8420136c3b52b3c15c)
+[View a sample summary here.](https://gist.github.com/burtenshaw/f142c5e52187fe50ab8df9be0687944c)
 
 *Note: This project is in the early stages and primarily designed for personal use. Use it carefully and feel free to contribute.*
 

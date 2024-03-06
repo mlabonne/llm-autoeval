@@ -141,14 +141,14 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
     git clone https://github.com/huggingface/lighteval.git
     cd lighteval 
     pip install '.[accelerate,quantization,adapters]'
-    cpu_count=$(nproc)
-
+    num_gpus=$(nvidia-smi --query-gpu=count --format=csv,noheader | head -n 1)
+    echo "Number of GPUs: $num_gpus"
     # check ig LIGHT_EVAL_TASK is defined else use recommended_set.txt
     if [ -z "$LIGHT_EVAL_TASK" ]; then
         LIGHT_EVAL_TASK="recommended_set.txt"
     fi
 
-    accelerate launch --num_processes=${cpu_count} run_evals_accelerate.py \
+    accelerate launch --multi_gpu --num_processes=${num_gpus} run_evals_accelerate.py \
     --model_args "pretrained=${MODEL_ID}" \
     --tasks "recommended_set.txt" \
     --output_dir="./evals/"

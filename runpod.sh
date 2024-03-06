@@ -136,6 +136,24 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     echo "Elapsed Time: $(($end-$start)) seconds"
     
     python ../llm-autoeval/main.py . $(($end-$start))
+
+elif [ "$BENCHMARK" == "lighteval" ]; then
+    git clone https://github.com/huggingface/lighteval.git
+    cd lighteval 
+    pip install '.[accelerate,quantization,adapters]'
+    cpu_count=$(nproc)
+
+    # check ig LIGHT_EVAL_TASK is defined else use recommended_set.txt
+    if [ -z "$LIGHT_EVAL_TASK" ]; then
+        LIGHT_EVAL_TASK="recommended_set.txt"
+    fi
+
+    accelerate launch --num_processes=${cpu_count} run_evals_accelerate.py \
+    --model_args "pretrained=${MODEL_ID}" \
+    --tasks "recommended_set.txt" \
+    --output_dir="./evals/"
+
+    python ../llm-autoeval/main.py ./evals/results $(($end-$start))
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi

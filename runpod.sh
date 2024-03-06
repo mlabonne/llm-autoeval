@@ -1,4 +1,4 @@
-#!/bin/bash
+# #!/bin/bash
 
 start=$(date +%s)
 
@@ -142,22 +142,21 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
     cd lighteval 
     pip install '.[accelerate,quantization,adapters]'
     num_gpus=$(nvidia-smi --query-gpu=count --format=csv,noheader | head -n 1)
-    num_gpus=$(echo $num_gpus | awk '{print int($1)}')
 
     echo "Number of GPUs: $num_gpus"
 
-    if $num_gpus -eq 0; then
+    if [[ $num_gpus -eq 0 ]]; then
         echo "No GPUs detected. Exiting."
         exit 1
 
-    elif $num_gpus -gt 1; then
+    elif [[ $num_gpus -gt 1 ]]; then
         echo "Multi-GPU mode enabled."
         accelerate launch --multi_gpu --num_processes=${num_gpus} run_evals_accelerate.py \
         --model_args "pretrained=${MODEL_ID}" \
         --tasks ${LIGHT_EVAL_TASK} \
         --output_dir="./evals/"
 
-    elif $num_gpus -eq 1; then
+    elif [[ $num_gpus -eq 1 ]]; then
         echo "Single-GPU mode enabled."
         accelerate launch run_evals_accelerate.py \
         --model_args "pretrained=${MODEL_ID}" \

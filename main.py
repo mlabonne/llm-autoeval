@@ -6,6 +6,7 @@ import time
 
 from llm_autoeval.table import make_table, make_final_table
 from llm_autoeval.upload import upload_to_github_gist
+from llm_autoeval.yall import create_yall
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -13,6 +14,7 @@ logger = logging.getLogger(__name__)
 MODEL_ID = os.getenv("MODEL_ID")
 BENCHMARK = os.getenv("BENCHMARK")
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
+YALL_GIST_ID = os.environ.get("YALL_GIST_ID")
 
 
 def main(directory: str, elapsed_time: float) -> None:
@@ -68,6 +70,10 @@ def main(directory: str, elapsed_time: float) -> None:
     upload_to_github_gist(
         summary, f"{MODEL_ID.split('/')[-1]}-{BENCHMARK.capitalize()}.md", GITHUB_API_TOKEN
     )
+
+    # Optional: Update YALL leaderboard
+    if YALL_GIST_ID:
+        create_yall()
 
 
 if __name__ == "__main__":

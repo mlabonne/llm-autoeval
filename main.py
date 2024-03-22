@@ -80,11 +80,7 @@ def _make_lighteval_summary(directory: str, elapsed_time: float) -> str:
     result_dict = _get_result_dict(directory)
     final_table = make_results_table(result_dict)
     summary = f"## {MODEL_ID.split('/')[-1]} - {BENCHMARK.capitalize()}\n\n"
-    summary += (
-        f"Elapsed time: {time.strftime('%H:%M:%S', time.gmtime(elapsed_time))}\n\n"
-    )
     summary += final_table
-    # TODO: Implement summarisatiopn of results
     return summary
 
 

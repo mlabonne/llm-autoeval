@@ -1,4 +1,4 @@
-#!/bin/bash
+# #!/bin/bash
 
 start=$(date +%s)
 
@@ -136,6 +136,40 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     echo "Elapsed Time: $(($end-$start)) seconds"
     
     python ../llm-autoeval/main.py . $(($end-$start))
+
+elif [ "$BENCHMARK" == "lighteval" ]; then
+    git clone https://github.com/huggingface/lighteval.git
+    cd lighteval 
+    pip install '.[accelerate,quantization,adapters]'
+    num_gpus=$(nvidia-smi --query-gpu=count --format=csv,noheader | head -n 1)
+
+    echo "Number of GPUs: $num_gpus"
+
+    if [[ $num_gpus -eq 0 ]]; then
+        echo "No GPUs detected. Exiting."
+        exit 1
+
+    elif [[ $num_gpus -gt 1 ]]; then
+        echo "Multi-GPU mode enabled."
+        accelerate launch --multi_gpu --num_processes=${num_gpus} run_evals_accelerate.py \
+        --model_args "pretrained=${MODEL_ID}" \
+        --tasks ${LIGHT_EVAL_TASK} \
+        --output_dir="./evals/"
+
+    elif [[ $num_gpus -eq 1 ]]; then
+        echo "Single-GPU mode enabled."
+        accelerate launch run_evals_accelerate.py \
+        --model_args "pretrained=${MODEL_ID}" \
+        --tasks ${LIGHT_EVAL_TASK} \
+        --output_dir="./evals/"
+    else
+        echo "Error: Invalid number of GPUs detected. Exiting."
+        exit 1
+    fi
+
+    end=$(date +%s)
+
+    python ../llm-autoeval/main.py ./evals/results $(($end-$start))
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
 fi
@@ -143,4 +177,5 @@ fi
 if [ "$DEBUG" == "False" ]; then
     runpodctl remove pod $RUNPOD_POD_ID
 fi
+
 sleep infinity

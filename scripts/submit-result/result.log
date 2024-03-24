@@ -1,0 +1,17 @@
+Passed argument batch_size = auto:1. Detecting largest batch size
+Determined largest batch size: 4
+hf (pretrained=/workspace/model,trust_remote_code=False,parallelize=True), gen_kwargs: (None), limit: 100.0, num_fewshot: None, batch_size: auto (4)
+|        Tasks        |Version|Filter|n-shot| Metric |Value|   |Stderr|
+|---------------------|-------|------|------|--------|----:|---|-----:|
+|pubmedqa             |      1|none  |None  |acc     | 0.97|±  |0.0171|
+|ocn                  |Yaml   |none  |None  |acc     | 0.78|±  |0.0416|
+|                     |       |none  |None  |acc_norm| 0.78|±  |0.0416|
+|professional_medicine|      0|none  |None  |acc     | 0.89|±  |0.0314|
+|college_medicine     |      0|none  |None  |acc     | 0.80|±  |0.0402|
+|clinical_knowledge   |      0|none  |None  |acc     | 0.84|±  |0.0368|
+|medmcqa              |Yaml   |none  |None  |acc     | 0.54|±  |0.0501|
+|                     |       |none  |None  |acc_norm| 0.54|±  |0.0501|
+|aocnp                |Yaml   |none  |None  |acc     | 0.74|±  |0.0441|
+|                     |       |none  |None  |acc_norm| 0.74|±  |0.0441|
+
+Elapsed Time: 1417 seconds

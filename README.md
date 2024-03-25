@@ -89,6 +89,7 @@ Let me know if you're interested in creating your own leaderboard with your gist
 * **"Error: File does not exist"**: This task didn't produce the JSON file that is parsed for the summary. Activate debug mode and rerun the evaluation to inspect the issue in the logs.
 * **"700 Killed" Error**: The hardware is not powerful enough for the evaluation. This happens when you try to run the Open LLM benchmark suite on an RTX 3070 for example.
 * **Outdated CUDA Drivers**: That's unlucky. You'll need to start a new pod in this case.
+* **"triu_tril_cuda_template" not implemented for 'BFloat16'**: Switch the image as explained in [this issue](https://github.com/mlabonne/llm-autoeval/issues/22).
 
 ## Acknowledgements
 

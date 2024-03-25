@@ -4,8 +4,6 @@ import os
 import argparse
 import time
 
-from lighteval.evaluator import make_results_table
-
 from llm_autoeval.table import make_table, make_final_table
 from llm_autoeval.upload import upload_to_github_gist
 
@@ -67,7 +65,7 @@ def _make_autoeval_summary(directory: str, elapsed_time: float) -> str:
 
 
 def _get_result_dict(directory: str) -> dict:
-    """Walk down driectories to get JSON path"""
+    """Walk down directories to get JSON path"""
 
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -77,6 +75,8 @@ def _get_result_dict(directory: str) -> dict:
 
 
 def _make_lighteval_summary(directory: str, elapsed_time: float) -> str:
+    from lighteval.evaluator import make_results_table
+    
     result_dict = _get_result_dict(directory)
     final_table = make_results_table(result_dict)
     summary = f"## {MODEL_ID.split('/')[-1]} - {BENCHMARK.capitalize()}\n\n"

@@ -23,7 +23,7 @@ apt install -y screen vim git-lfs
 screen
 
 # Install common libraries
-pip install -q requests accelerate sentencepiece pytablewriter einops protobuf
+pip install -q requests accelerate sentencepiece pytablewriter einops protobuf huggingface_hub
 pip install -U transformers
 
 if [ "$DEBUG" == "True" ]; then

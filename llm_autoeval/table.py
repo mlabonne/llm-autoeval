@@ -67,7 +67,9 @@ def make_table(result_dict, task):
     values = []
 
     for k, dic in sorted(result_dict["results"].items()):
-        version = result_dict["versions"][k]
+        # Correctly use get() to safely access the dictionary
+        version = result_dict["versions"].get(k, "N/A")  # Use get() on the versions dictionary
+        
         percent = k == "squad2"
         for m, v in dic.items():
             if m.endswith("_stderr"):
@@ -93,10 +95,7 @@ def make_table(result_dict, task):
                         # If conversion fails, use the original string value
                         v_formatted = v
 
-                    if isinstance(version, str):
-                        values.append([k, version, m, v_formatted, "", ""])
-                    else:
-                        values.append([k, version, m, v_formatted, "", ""])
+                    values.append([k, version, m, v_formatted, "", ""])
 
             k = ""
             version = ""

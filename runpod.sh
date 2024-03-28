@@ -84,7 +84,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     pip install accelerate
 
     benchmark="arc"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks arc_challenge \
         --num_fewshot 25 \
@@ -92,7 +93,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="hellaswag"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks hellaswag \
         --num_fewshot 10 \
@@ -100,7 +102,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="mmlu"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks mmlu \
         --num_fewshot 5 \
@@ -109,7 +112,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="truthfulqa"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks truthfulqa \
         --num_fewshot 0 \
@@ -117,7 +121,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="winogrande"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks winogrande \
         --num_fewshot 5 \
@@ -125,7 +130,8 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="gsm8k"
-    accelerate launch --model lm_eval \
+    accelerate launch -m lm_eval \
+        --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,gpu_memory_utilization=0.8,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks gsm8k \
         --num_fewshot 5 \

@@ -37,6 +37,7 @@ if [ "$BENCHMARK" == "nous" ]; then
     pip install -e .
 
     benchmark="agieval"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     python main.py \
         --model hf-causal \
         --model_args pretrained=$MODEL_ID,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -46,6 +47,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="gpt4all"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     python main.py \
         --model hf-causal \
         --model_args pretrained=$MODEL_ID,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -55,6 +57,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="truthfulqa"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     python main.py \
         --model hf-causal \
         --model_args pretrained=$MODEL_ID,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -64,6 +67,7 @@ if [ "$BENCHMARK" == "nous" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="bigbench"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     python main.py \
         --model hf-causal \
         --model_args pretrained=$MODEL_ID,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -84,6 +88,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
     pip install accelerate
 
     benchmark="arc"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -93,6 +98,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="hellaswag"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -102,6 +108,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
 
     benchmark="mmlu"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -112,6 +119,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="truthfulqa"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -121,6 +129,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="winogrande"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -130,6 +139,7 @@ elif [ "$BENCHMARK" == "openllm" ]; then
         --output_path ./${benchmark}.json
     
     benchmark="gsm8k"
+    echo "==================$(echo $benchmark | tr '[:lower:]' '[:upper:]')=================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
@@ -177,7 +187,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
 
     python ../llm-autoeval/main.py ./evals/results $(($end-$start))
 else
-    echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous' or 'openllm'."
+    echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous', 'openllm', or 'lighteval'."
 fi
 
 if [ "$DEBUG" == "False" ]; then

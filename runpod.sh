@@ -80,7 +80,7 @@ if [ "$BENCHMARK" == "nous" ]; then
 elif [ "$BENCHMARK" == "openllm" ]; then
     git clone https://github.com/EleutherAI/lm-evaluation-harness
     cd lm-evaluation-harness
-    pip install -e
+    pip install -e .
     pip install accelerate
 
     benchmark="arc"

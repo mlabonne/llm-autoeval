@@ -57,41 +57,52 @@ def calculate_average(data, task):
 
 
 def make_table(result_dict, task):
-    """
-    Generate table of results.
-    Based on https://github.com/mlabonne/llm-autoeval/blob/master/llm_autoeval/table.py
-    """
+    """Generate table of results."""
+    # TODO: properly format values in table for openllm
+    
     md_writer = MarkdownTableWriter()
-    md_writer.headers = ["Task", "Average", "Version", "Metric", "Value", "", "Stderr"]
+    md_writer.headers = ["Task", "Version", "Metric", "Value", "", "Stderr"]
 
     values = []
 
-    average = round(calculate_average(result_dict, task), 2)
-
-    for k, dic in result_dict["results"].items():
+    for k, dic in sorted(result_dict["results"].items()):
         version = result_dict["versions"].get(k, "N/A")
-        n = str(result_dict["n-shot"][k])
-
-        if "alias" in dic:
-            k = dic.pop("alias")
-
-        for (mf), v in dic.items():
-            m, _, f = mf.partition(",")
+        
+        percent = k == "squad2"
+        for m, v in dic.items():
             if m.endswith("_stderr"):
                 continue
 
-            if m + "_stderr" + "," + f in dic:
-                se = dic[m + "_stderr" + "," + f]
-                if se != "N/A":
-                    se = "%.4f" % se
-                values.append([k, version, f, n, m, "%.4f" % v, "±", se])
+            if m + "_stderr" in dic:
+                se = dic[m + "_stderr"]
+                if percent or m == "ppl":
+                    values.append([k, version, m, "%.2f" % v, "±", "%.2f" % se])
+                else:
+                    values.append(
+                        [k, version, m, "%.2f" % (v * 100), "±", "%.2f" % (se * 100)]
+                    )
             else:
-                values.append([k, version, f, n, m, "%.4f" % v, "", ""])
+                if percent or m == "ppl":
+                    values.append([k, version, m, "%.2f" % v, "", ""])
+                else:
+                    try:
+                        # Attempt to convert v to a float
+                        v_converted = float(v)
+                        v_formatted = "%.2f" % v_converted
+                    except ValueError:
+                        # If conversion fails, use the original string value
+                        v_formatted = v
+
+                    values.append([k, version, m, v_formatted, "", ""])
+
             k = ""
             version = ""
 
     md_writer.value_matrix = values
-)
+
+    # Get average score
+    average = round(calculate_average(result_dict, task), 2)
+
     return md_writer.dumps(), average
 
 

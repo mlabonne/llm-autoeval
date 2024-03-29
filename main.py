@@ -1,10 +1,10 @@
+import argparse
 import json
 import logging
 import os
-import argparse
 import time
 
-from llm_autoeval.table import make_table, make_final_table
+from llm_autoeval.table import make_final_table, make_table
 from llm_autoeval.upload import upload_to_github_gist
 
 logging.basicConfig(level=logging.INFO)
@@ -76,17 +76,19 @@ def _get_result_dict(directory: str) -> dict:
 
 def _make_lighteval_summary(directory: str, elapsed_time: float) -> str:
     from lighteval.evaluator import make_results_table
-    
+
     result_dict = _get_result_dict(directory)
     final_table = make_results_table(result_dict)
     summary = f"## {MODEL_ID.split('/')[-1]} - {BENCHMARK.capitalize()}\n\n"
     summary += final_table
     return summary
 
+
 def _make_eqbench_summary(directory: str, elapsed_time: float) -> str:
     result_dict = _get_result_dict(directory)
     summary = f"## {MODEL_ID.split('/')[-1]} - {BENCHMARK.capitalize()}\n\n"
     return summary
+
 
 def main(directory: str, elapsed_time: float) -> None:
     # Tasks

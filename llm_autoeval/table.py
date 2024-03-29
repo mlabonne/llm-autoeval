@@ -1,8 +1,7 @@
-import os
 import math
+import os
 
 from pytablewriter import MarkdownTableWriter
-
 
 BENCHMARK = os.getenv("BENCHMARK")
 
@@ -41,9 +40,7 @@ def calculate_average(data, task):
         elif task == "winogrande":
             return data["results"]["winogrande"]["acc,none"] * 100
         elif task == "gsm8k":
-            return (
-                data["results"]["gsm8k"]["exact_match,get-answer"] * 100
-            )
+            return data["results"]["gsm8k"]["exact_match,strict-match"] * 100
 
     elif BENCHMARK == "nous":
         if task == "agieval":
@@ -61,51 +58,41 @@ def calculate_average(data, task):
 
 def make_table(result_dict, task):
     """Generate table of results."""
+    from pytablewriter import MarkdownTableWriter
+
     md_writer = MarkdownTableWriter()
-    md_writer.headers = ["Task", "Version", "Metric", "Value", "", "Stderr"]
+    md_writer.headers = ["Task", "Average", "Version", "Metric", "Value", "", "Stderr"]
 
     values = []
 
+    average = round(calculate_average(result_dict, task), 2)
+
     for k, dic in sorted(result_dict["results"].items()):
-        # Correctly use get() to safely access the dictionary
-        version = result_dict["versions"].get(k, "N/A")  # Use get() on the versions dictionary
-        
+        version = result_dict["versions"].get(k, "N/A")
         percent = k == "squad2"
+
         for m, v in dic.items():
             if m.endswith("_stderr"):
                 continue
 
-            if m + "_stderr" in dic:
-                se = dic[m + "_stderr"]
-                if percent or m == "ppl":
-                    values.append([k, version, m, "%.2f" % v, "±", "%.2f" % se])
-                else:
-                    values.append(
-                        [k, version, m, "%.2f" % (v * 100), "±", "%.2f" % (se * 100)]
-                    )
-            else:
-                if percent or m == "ppl":
-                    values.append([k, version, m, "%.2f" % v, "", ""])
-                else:
-                    try:
-                        # Attempt to convert v to a float
-                        v_converted = float(v)
-                        v_formatted = "%.2f" % v_converted
-                    except ValueError:
-                        # If conversion fails, use the original string value
-                        v_formatted = v
+            stderr = dic.get(m + "_stderr", "")
+            stderr_display = "±%.2f" % stderr if stderr else ""
+            metric_value = "%.2f" % v if percent or m == "ppl" else "%.2f" % (v * 100)
 
-                    values.append([k, version, m, v_formatted, "", ""])
+            # Adjusted to skip empty row insertion logic for simplicity
+            values.append([k, "", version, m, metric_value, "", stderr_display])
 
+            # Reset k and version to avoid repetition in the table
             k = ""
             version = ""
 
+    # Add a row for the average if desired, here shown at the start of values for demonstration
+    values.insert(0, ["Average", average, "", "", "", "", ""])
+
     md_writer.value_matrix = values
+    table_output = md_writer.dumps()
 
-    # Get average score
-    average = round(calculate_average(result_dict, task), 2)
-
-    return md_writer.dumps(), average
+    return table_output
 
 
 def make_final_table(result_dict, model_name):

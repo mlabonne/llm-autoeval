@@ -1,8 +1,7 @@
-import os
 import math
+import os
 
 from pytablewriter import MarkdownTableWriter
-
 
 BENCHMARK = os.getenv("BENCHMARK")
 
@@ -33,15 +32,15 @@ def calculate_average(data, task):
             return data["results"]["arc_challenge"]["acc_norm,none"] * 100
         elif task == "hellaswag":
             return data["results"]["hellaswag"]["acc_norm,none"] * 100
+        elif task == "mmlu":
+            return data["results"]["mmlu"]["acc,none"] * 100
         elif task == "truthfulqa":
             value = data["results"]["truthfulqa_mc2"]["acc,none"]
             return 0.0 if math.isnan(value) else value * 100
         elif task == "winogrande":
             return data["results"]["winogrande"]["acc,none"] * 100
         elif task == "gsm8k":
-            return (
-                data["results"]["gsm8k"]["exact_match,get-answer"] * 100
-            )  # should be "acc" instead
+            return data["results"]["gsm8k"]["exact_match,strict-match"] * 100
 
     elif BENCHMARK == "nous":
         if task == "agieval":
@@ -59,13 +58,16 @@ def calculate_average(data, task):
 
 def make_table(result_dict, task):
     """Generate table of results."""
+    # TODO: properly format values in table for openllm
+    
     md_writer = MarkdownTableWriter()
     md_writer.headers = ["Task", "Version", "Metric", "Value", "", "Stderr"]
 
     values = []
 
     for k, dic in sorted(result_dict["results"].items()):
-        version = result_dict["versions"][k]
+        version = result_dict["versions"].get(k, "N/A")
+        
         percent = k == "squad2"
         for m, v in dic.items():
             if m.endswith("_stderr"):
@@ -91,10 +93,7 @@ def make_table(result_dict, task):
                         # If conversion fails, use the original string value
                         v_formatted = v
 
-                    if isinstance(version, str):
-                        values.append([k, version, m, v_formatted, "", ""])
-                    else:
-                        values.append([k, version, m, v_formatted, "", ""])
+                    values.append([k, version, m, v_formatted, "", ""])
 
             k = ""
             version = ""

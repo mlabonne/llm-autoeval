@@ -57,9 +57,10 @@ def calculate_average(data, task):
 
 
 def make_table(result_dict, task):
-    """Generate table of results."""
-    from pytablewriter import MarkdownTableWriter
-
+    """
+    Generate table of results.
+    Based on https://github.com/mlabonne/llm-autoeval/blob/master/llm_autoeval/table.py
+    """
     md_writer = MarkdownTableWriter()
     md_writer.headers = ["Task", "Average", "Version", "Metric", "Value", "", "Stderr"]
 
@@ -67,32 +68,31 @@ def make_table(result_dict, task):
 
     average = round(calculate_average(result_dict, task), 2)
 
-    for k, dic in sorted(result_dict["results"].items()):
+    for k, dic in result_dict["results"].items():
         version = result_dict["versions"].get(k, "N/A")
-        percent = k == "squad2"
+        n = str(result_dict["n-shot"][k])
 
-        for m, v in dic.items():
+        if "alias" in dic:
+            k = dic.pop("alias")
+
+        for (mf), v in dic.items():
+            m, _, f = mf.partition(",")
             if m.endswith("_stderr"):
                 continue
 
-            stderr = dic.get(m + "_stderr", "")
-            stderr_display = "±%.2f" % stderr if stderr else ""
-            metric_value = "%.2f" % v if percent or m == "ppl" else "%.2f" % (v * 100)
-
-            # Adjusted to skip empty row insertion logic for simplicity
-            values.append([k, "", version, m, metric_value, "", stderr_display])
-
-            # Reset k and version to avoid repetition in the table
+            if m + "_stderr" + "," + f in dic:
+                se = dic[m + "_stderr" + "," + f]
+                if se != "N/A":
+                    se = "%.4f" % se
+                values.append([k, version, f, n, m, "%.4f" % v, "±", se])
+            else:
+                values.append([k, version, f, n, m, "%.4f" % v, "", ""])
             k = ""
             version = ""
 
-    # Add a row for the average if desired, here shown at the start of values for demonstration
-    values.insert(0, ["Average", average, "", "", "", "", ""])
-
     md_writer.value_matrix = values
-    table_output = md_writer.dumps()
-
-    return table_output
+)
+    return md_writer.dumps(), average
 
 
 def make_final_table(result_dict, model_name):

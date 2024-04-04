@@ -201,11 +201,11 @@ elif [ "$BENCHMARK" == "eq-bench" ]; then
         --tasks eq_bench \
         --num_fewshot 0 \
         --batch_size auto \
-        --output_path ./results/${benchmark}.json
+        --output_path ./evals/${benchmark}.json
 
     end=$(date +%s)
 
-    python ../llm-autoeval/main.py ./results $(($end-$start))
+    python ../llm-autoeval/main.py ./evals $(($end-$start))
 
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous', 'openllm', or 'lighteval'."

@@ -1,0 +1,6 @@
+dataset_name: cuad_competitive_restriction_exception
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_competitive_restriction_exception_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: maud_additional_matching_rights_period_for_modifications_(cor)
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_additional_matching_rights_period_for_modifications_cor_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

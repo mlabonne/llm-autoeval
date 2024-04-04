@@ -1,0 +1,6 @@
+dataset_name: ucc_v_common_law
+include: ../multiple_choice_template_yaml
+task: legalbench_ucc_v_common_law_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_CONCLUSION_TASKS

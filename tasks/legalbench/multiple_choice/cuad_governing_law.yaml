@@ -1,0 +1,6 @@
+dataset_name: cuad_governing_law
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_governing_law_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

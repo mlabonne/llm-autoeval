@@ -1,0 +1,6 @@
+dataset_name: opp115_do_not_track
+include: ../multiple_choice_template_yaml
+task: legalbench_opp115_do_not_track_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

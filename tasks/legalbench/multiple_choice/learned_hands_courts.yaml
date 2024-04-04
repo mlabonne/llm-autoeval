@@ -1,0 +1,6 @@
+dataset_name: learned_hands_courts
+include: ../multiple_choice_template_yaml
+task: legalbench_learned_hands_courts_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_ISSUE_TASKS

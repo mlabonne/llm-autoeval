@@ -1,0 +1,6 @@
+dataset_name: abercrombie
+include: ../multiple_choice_template_yaml
+task: legalbench_abercrombie_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_CONCLUSION_TASKS

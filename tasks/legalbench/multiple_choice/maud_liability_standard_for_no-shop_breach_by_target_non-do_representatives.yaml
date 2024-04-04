@@ -1,0 +1,6 @@
+dataset_name: maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

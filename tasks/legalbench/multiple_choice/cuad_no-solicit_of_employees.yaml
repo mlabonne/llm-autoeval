@@ -1,0 +1,6 @@
+dataset_name: cuad_no-solicit_of_employees
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_no-solicit_of_employees_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: overruling
+include: ../multiple_choice_template_yaml
+task: legalbench_overruling_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RHETORIC_TASKS

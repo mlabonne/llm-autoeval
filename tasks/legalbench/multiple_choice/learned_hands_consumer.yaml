@@ -1,0 +1,6 @@
+dataset_name: learned_hands_consumer
+include: ../multiple_choice_template_yaml
+task: legalbench_learned_hands_consumer_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_ISSUE_TASKS

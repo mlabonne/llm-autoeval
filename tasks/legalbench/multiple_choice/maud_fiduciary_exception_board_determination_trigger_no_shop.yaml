@@ -1,0 +1,6 @@
+dataset_name: maud_fiduciary_exception_board_determination_trigger_(no_shop)
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_fiduciary_exception_board_determination_trigger_no_shop_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

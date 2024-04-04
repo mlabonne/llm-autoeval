@@ -1,0 +1,6 @@
+dataset_name: maud_accuracy_of_target_general_rw_bringdown_timing_answer
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_accuracy_of_target_general_rw_bringdown_timing_answer_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

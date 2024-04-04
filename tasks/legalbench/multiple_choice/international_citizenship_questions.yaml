@@ -1,0 +1,6 @@
+dataset_name: international_citizenship_questions
+include: ../multiple_choice_template_yaml
+task: legalbench_international_citizenship_questions_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RULE_TASKS

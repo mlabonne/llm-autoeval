@@ -1,0 +1,6 @@
+dataset_name: definition_classification
+include: ../multiple_choice_template_yaml
+task: legalbench_definition_classification_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RHETORIC_TASKS

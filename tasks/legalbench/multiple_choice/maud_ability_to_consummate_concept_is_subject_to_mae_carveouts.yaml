@@ -1,0 +1,6 @@
+dataset_name: maud_ability_to_consummate_concept_is_subject_to_mae_carveouts
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_ability_to_consummate_concept_is_subject_to_mae_carveouts_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

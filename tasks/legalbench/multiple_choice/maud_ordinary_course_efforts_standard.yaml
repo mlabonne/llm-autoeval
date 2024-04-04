@@ -1,0 +1,6 @@
+dataset_name: maud_ordinary_course_efforts_standard
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_ordinary_course_efforts_standard_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: contract_nli_explicit_identification
+include: ../multiple_choice_template_yaml
+task: legalbench_contract_nli_explicit_identification_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_INTERPRETATION_TASKS

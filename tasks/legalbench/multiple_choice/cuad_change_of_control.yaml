@@ -1,0 +1,6 @@
+dataset_name: cuad_change_of_control
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_change_of_control_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

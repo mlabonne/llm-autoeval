@@ -1,0 +1,6 @@
+dataset_name: cuad_affiliate_license-licensor
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_affiliate_license-licensor_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_INTERPRETATION_TASKS

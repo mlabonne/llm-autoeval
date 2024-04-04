@@ -1,0 +1,6 @@
+dataset_name: contract_nli_confidentiality_of_agreement
+include: ../multiple_choice_template_yaml
+task: legalbench_contract_nli_confidentiality_of_agreement_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_INTERPRETATION_TASKS

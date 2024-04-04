@@ -1,0 +1,6 @@
+dataset_name: maud_knowledge_definition
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_knowledge_definition_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

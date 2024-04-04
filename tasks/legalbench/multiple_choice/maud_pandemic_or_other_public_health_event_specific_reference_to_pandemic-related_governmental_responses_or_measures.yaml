@@ -1,0 +1,6 @@
+dataset_name: maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: supply_chain_disclosure_best_practice_training
+include: ../multiple_choice_template_yaml
+task: legalbench_supply_chain_disclosure_best_practice_training_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: maud_accuracy_of_target_capitalization_rw_(outstanding_shares)_bringdown_standard_answer
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_accuracy_of_target_capitalization_rw_outstanding_shares_bringdown_standard_answer_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

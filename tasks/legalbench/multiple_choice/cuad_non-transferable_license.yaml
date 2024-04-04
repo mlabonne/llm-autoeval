@@ -1,0 +1,6 @@
+dataset_name: cuad_non-transferable_license
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_non-transferable_license_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

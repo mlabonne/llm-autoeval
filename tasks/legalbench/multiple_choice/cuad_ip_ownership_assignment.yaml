@@ -1,0 +1,6 @@
+dataset_name: cuad_ip_ownership_assignment
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_ip_ownership_assignment_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

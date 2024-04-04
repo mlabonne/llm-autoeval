@@ -1,0 +1,6 @@
+dataset_name: cuad_irrevocable_or_perpetual_license
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_irrevocable_or_perpetual_license_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

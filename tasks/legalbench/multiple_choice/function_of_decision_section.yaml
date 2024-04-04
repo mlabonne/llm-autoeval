@@ -1,0 +1,6 @@
+dataset_name: function_of_decision_section
+include: ../multiple_choice_template_yaml
+task: legalbench_function_of_decision_section_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RHETORIC_TASKS

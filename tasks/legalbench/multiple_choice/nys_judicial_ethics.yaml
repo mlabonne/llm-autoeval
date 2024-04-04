@@ -1,0 +1,6 @@
+dataset_name: nys_judicial_ethics
+include: ../multiple_choice_template_yaml
+task: legalbench_nys_judicial_ethics_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RULE_TASKS

@@ -1,0 +1,6 @@
+dataset_name: opp115_user_choice_control
+include: ../multiple_choice_template_yaml
+task: legalbench_opp115_user_choice_control_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

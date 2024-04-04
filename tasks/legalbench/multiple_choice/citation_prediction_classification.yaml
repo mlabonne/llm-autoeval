@@ -1,0 +1,6 @@
+dataset_name: citation_prediction_classification
+include: ../multiple_choice_template_yaml
+task: legalbench_citation_prediction_classification_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_RULE_TASKS

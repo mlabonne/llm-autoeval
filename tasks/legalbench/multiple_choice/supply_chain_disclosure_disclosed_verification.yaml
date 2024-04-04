@@ -1,0 +1,6 @@
+dataset_name: supply_chain_disclosure_disclosed_verification
+include: ../multiple_choice_template_yaml
+task: legalbench_supply_chain_disclosure_disclosed_verification_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

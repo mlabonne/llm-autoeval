@@ -1,0 +1,6 @@
+dataset_name: privacy_policy_entailment
+include: ../multiple_choice_template_yaml
+task: legalbench_privacy_policy_entailment_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

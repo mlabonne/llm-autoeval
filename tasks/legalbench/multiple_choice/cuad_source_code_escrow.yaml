@@ -1,0 +1,6 @@
+dataset_name: cuad_source_code_escrow
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_source_code_escrow_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

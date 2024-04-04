@@ -1,0 +1,6 @@
+dataset_name: maud_includes_consistent_with_past_practice
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_includes_consistent_with_past_practice_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

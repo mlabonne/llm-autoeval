@@ -1,0 +1,6 @@
+dataset_name: textualism_tool_plain
+include: ../multiple_choice_template_yaml
+task: legalbench_textualism_tool_plain_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RHETORIC_TASKS

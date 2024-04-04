@@ -1,0 +1,6 @@
+dataset_name: cuad_third_party_beneficiary
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_third_party_beneficiary_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

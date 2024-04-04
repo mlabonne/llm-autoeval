@@ -1,0 +1,6 @@
+dataset_name: maud_cor_standard_(superior_offer)
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_cor_standard_superior_offer_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

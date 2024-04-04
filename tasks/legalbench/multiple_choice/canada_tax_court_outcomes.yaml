@@ -1,0 +1,6 @@
+dataset_name: canada_tax_court_outcomes
+include: ../multiple_choice_template_yaml
+task: legalbench_canada_tax_court_outcomes_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_RHETORIC_TASKS

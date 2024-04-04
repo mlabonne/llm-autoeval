@@ -1,0 +1,6 @@
+dataset_name: cuad_license_grant
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_license_grant_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

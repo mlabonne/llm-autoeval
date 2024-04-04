@@ -1,0 +1,6 @@
+dataset_name: opp115_data_security
+include: ../multiple_choice_template_yaml
+task: legalbench_opp115_data_security_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

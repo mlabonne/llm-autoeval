@@ -1,0 +1,6 @@
+dataset_name: maud_application_of_buyer_consent_requirement_(negative_interim_covenant)
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_application_of_buyer_consent_requirement_negative_interim_covenant_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

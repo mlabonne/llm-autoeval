@@ -1,0 +1,6 @@
+dataset_name: opp115_first_party_collection_use
+include: ../multiple_choice_template_yaml
+task: legalbench_opp115_first_party_collection_use_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

@@ -1,0 +1,6 @@
+dataset_name: unfair_tos
+include: ../multiple_choice_template_yaml
+task: legalbench_unfair_tos_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

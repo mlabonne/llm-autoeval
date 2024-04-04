@@ -1,0 +1,6 @@
+dataset_name: oral_argument_question_purpose
+include: ../multiple_choice_template_yaml
+task: legalbench_oral_argument_question_purpose_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_RHETORIC_TASKS

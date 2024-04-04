@@ -1,0 +1,6 @@
+dataset_name: maud_intervening_event_-_required_to_occur_after_signing_-_answer
+include: ../multiple_choice_template_yaml
+task: legalbench_maud_intervening_event_-_required_to_occur_after_signing_-_answer_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

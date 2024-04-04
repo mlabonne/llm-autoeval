@@ -1,0 +1,6 @@
+dataset_name: cuad_termination_for_convenience
+include: ../multiple_choice_template_yaml
+task: legalbench_cuad_termination_for_convenience_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_INTERPRETATION_TASKS

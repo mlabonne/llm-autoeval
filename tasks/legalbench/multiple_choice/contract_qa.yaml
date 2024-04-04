@@ -1,0 +1,6 @@
+dataset_name: contract_qa
+include: ../multiple_choice_template_yaml
+task: legalbench_contract_qa_multiple_choice
+group: 
+ - legalbench_exact_match
+ - legalbench_INTERPRETATION_TASKS

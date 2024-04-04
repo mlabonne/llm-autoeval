@@ -1,0 +1,6 @@
+dataset_name: corporate_lobbying
+include: ../multiple_choice_template_yaml
+task: legalbench_corporate_lobbying_multiple_choice
+group: 
+  - legalbench_exact_match
+  - legalbench_ISSUE_TASKS

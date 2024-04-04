@@ -25,9 +25,11 @@ def _make_autoeval_summary(directory: str, elapsed_time: float) -> str:
         tasks = ["ARC", "HellaSwag", "MMLU", "TruthfulQA", "Winogrande", "GSM8K"]
     elif BENCHMARK == "nous":
         tasks = ["AGIEval", "GPT4All", "TruthfulQA", "Bigbench"]
+    elif BENCHMARK == "eq-bench":
+        tasks = ["EQ-Bench"]
     else:
         raise NotImplementedError(
-            f"BENCHMARK should be 'openllm' or 'nous' (current value = {BENCHMARK})"
+            f"The benchmark {BENCHMARK} could not be found."
         )
 
     # Load results
@@ -84,20 +86,12 @@ def _make_lighteval_summary(directory: str, elapsed_time: float) -> str:
     return summary
 
 
-def _make_eqbench_summary(directory: str, elapsed_time: float) -> str:
-    result_dict = _get_result_dict(directory)
-    summary = f"## {MODEL_ID.split('/')[-1]} - {BENCHMARK.capitalize()}\n\n"
-    return summary
-
-
 def main(directory: str, elapsed_time: float) -> None:
     # Tasks
-    if BENCHMARK == "openllm" or BENCHMARK == "nous":
+    if BENCHMARK == "openllm" or BENCHMARK == "nous" or BENCHMARK == "eq-bench":
         summary = _make_autoeval_summary(directory, elapsed_time)
     elif BENCHMARK == "lighteval":
         summary = _make_lighteval_summary(directory, elapsed_time)
-    elif BENCHMARK == "eq-bench":
-        summary = _make_eqbench_summary(directory, elapsed_time)
     else:
         raise NotImplementedError(
             f"BENCHMARK should be 'openllm' or 'nous' (current value = {BENCHMARK})"

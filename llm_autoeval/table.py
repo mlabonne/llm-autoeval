@@ -34,7 +34,7 @@ def calculate_average(data, task):
         elif task == "hellaswag":
             return data["results"]["hellaswag"]["acc_norm,none"] * 100
         elif task == "mmlu":
-           return data["results"]["mmlu"]["acc,none"] * 100    
+            return data["results"]["mmlu"]["acc,none"] * 100    
         elif task == "truthfulqa":
             value = data["results"]["truthfulqa_mc2"]["acc,none"]
             return 0.0 if math.isnan(value) else value * 100

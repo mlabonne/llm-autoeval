@@ -25,9 +25,11 @@ def _make_autoeval_summary(directory: str, elapsed_time: float) -> str:
         tasks = ["ARC", "HellaSwag", "MMLU", "TruthfulQA", "Winogrande", "GSM8K"]
     elif BENCHMARK == "nous":
         tasks = ["AGIEval", "GPT4All", "TruthfulQA", "Bigbench"]
+    elif BENCHMARK == "eq-bench":
+        tasks = ["EQ-Bench"]
     else:
         raise NotImplementedError(
-            f"BENCHMARK should be 'openllm' or 'nous' (current value = {BENCHMARK})"
+            f"The benchmark {BENCHMARK} could not be found."
         )
 
     # Load results

@@ -194,18 +194,18 @@ elif [ "$BENCHMARK" == "eq-bench" ]; then
     pip install accelerate
 
     benchmark="eq-bench"
-    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/6] =================="
+    echo "================== $(echo $benchmark | tr '[:lower:]' '[:upper:]') [1/1] =================="
     accelerate launch -m lm_eval \
         --model hf \
         --model_args pretrained=${MODEL_ID},dtype=auto,trust_remote_code=$TRUST_REMOTE_CODE \
         --tasks eq_bench \
         --num_fewshot 0 \
         --batch_size auto \
-        --output_path ./${benchmark}.json
+        --output_path ./results/${benchmark}.json
 
     end=$(date +%s)
 
-    python ../llm-autoeval/main.py ./evals/results $(($end-$start))
+    python ../llm-autoeval/main.py ./results $(($end-$start))
 
 else
     echo "Error: Invalid BENCHMARK value. Please set BENCHMARK to 'nous', 'openllm', or 'lighteval'."

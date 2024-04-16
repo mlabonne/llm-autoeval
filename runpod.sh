@@ -1,4 +1,4 @@
-# #!/bin/bash
+# !/bin/bash
 
 start=$(date +%s)
 
@@ -25,6 +25,12 @@ screen
 # Install common libraries
 pip install -q requests accelerate sentencepiece pytablewriter einops protobuf huggingface_hub==0.21.4
 pip install -U transformers
+
+# Check if HUGGINGFACE_TOKEN is set and log in to Hugging Face
+if [ -n "$HUGGINGFACE_TOKEN" ]; then
+    echo "HUGGINGFACE_TOKEN is defined. Logging in..."
+    huggingface-cli login --token $HUGGINGFACE_TOKEN --add-to-git-credential
+fi
 
 if [ "$DEBUG" == "True" ]; then
     echo "Launch LLM AutoEval in debug mode"

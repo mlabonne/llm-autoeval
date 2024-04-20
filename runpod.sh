@@ -175,6 +175,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
         echo "Multi-GPU mode enabled."
         accelerate launch --multi_gpu --num_processes=${num_gpus} run_evals_accelerate.py \
         --model_args "pretrained=${MODEL_ID}" \
+        --use_chat_template \
         --tasks ${LIGHT_EVAL_TASK} \
         --output_dir="./evals/"
 
@@ -182,6 +183,7 @@ elif [ "$BENCHMARK" == "lighteval" ]; then
         echo "Single-GPU mode enabled."
         accelerate launch run_evals_accelerate.py \
         --model_args "pretrained=${MODEL_ID}" \
+        --use_chat_template \
         --tasks ${LIGHT_EVAL_TASK} \
         --output_dir="./evals/"
     else

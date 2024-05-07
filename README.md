@@ -36,9 +36,9 @@ LLM AutoEval **simplifies the process of evaluating LLMs** using a convenient [C
 * **`MODEL_ID`**: Enter the model id from Hugging Face.
 * **`BENCHMARK`**: 
     * `nous`: List of tasks: AGIEval, GPT4ALL, TruthfulQA, and Bigbench (popularized by [Teknium](https://github.com/teknium1) and [NousResearch](https://github.com/NousResearch)). This is recommended.
-    * `lighteval`: This is a [new library](https://github.com/huggingface/lighteval) from Hugging Face. It allows you to specify your tasks as shown in the readme. Check the list of [recommended tasks](https://github.com/huggingface/lighteval/blob/main/tasks_examples/recommended_set.txt) to see what you can use (e.g., HELM, PIQA, GSM8K, MATH, etc.)
+    * `lighteval`: This is a [new library](https://github.com/huggingface/lighteval) from Hugging Face. It allows you to specify your tasks as shown in the readme. Check the list of [recommended tasks](https://github.com/huggingface/lighteval/blob/main/examples/tasks/recommended_set.txt) to see what you can use (e.g., HELM, PIQA, GSM8K, MATH, etc.)
     * `openllm`: List of tasks: ARC, HellaSwag, MMLU, Winogrande, GSM8K, and TruthfulQA (like the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)). It uses the [vllm](https://docs.vllm.ai/) implementation to enhance speed (note that the results will not be identical to those obtained without using vllm). "mmlu" is currently missing because of a problem with vllm.
-* **`LIGHTEVAL_TASK`**: You can select one or several tasks as specified in the [readme](https://github.com/huggingface/lighteval?tab=readme-ov-file#usage) or in the list of [recommended tasks](https://github.com/huggingface/lighteval/blob/main/tasks_examples/recommended_set.txt).
+* **`LIGHTEVAL_TASK`**: You can select one or several tasks as specified in the [readme](https://github.com/huggingface/lighteval?tab=readme-ov-file#usage) or in the list of [recommended tasks](https://github.com/huggingface/lighteval/blob/main/examples/tasks/recommended_set.txt).
 
 ### Cloud GPU
 
